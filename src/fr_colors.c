@@ -15,4 +15,5 @@
 int 	fr_color(t_fractol *fractol, int n)
 {
 	//color palette
+	return (0xFF);
 }

@@ -3,6 +3,13 @@ project(fractol)
 
 set(CMAKE_C_STANDARD 99)
 
+#block for Mojave:
+find_library(OPEN_GL OpenGl)
+find_library(APP_KIT AppKit)
+add_definitions(${GCC_COMPILE_FLAGS})
+link_directories(minilibx)
+include_directories(includes minilibx)
+
 set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -lmlx -framework OpenGL -framework AppKit")
 
 #add_library (my_library STATIC|SHARED|MODULE minilibx/libmlx.a)
@@ -89,3 +96,6 @@ add_executable(fractol
 		src/fr_keyboard.c
 		src/fr_mouse.c
 		src/fr_evluate.c src/fr_colors.c)
+
+#block for Mojave:
+target_link_libraries(fractol mlx ${OPEN_GL} ${APP_KIT})
