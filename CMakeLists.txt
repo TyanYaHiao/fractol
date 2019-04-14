@@ -10,7 +10,7 @@ set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -lmlx -framework OpenGL -framework AppKit")
 add_executable(fractol
 		minilibx/libmlx.a
 		includes/mlx.h
-		includes/fractol.h
+		includes/fr_fractol.h
 		libft/libft.h
 		libft/ft_abs.c
 		libft/ft_atoi.c
@@ -81,4 +81,11 @@ add_executable(fractol
 		libft/ft_power.c
 		libft/ft_round_double.c
 		libft/ft_abs_double.c
-		src/main.c)
+		src/main.c
+		src/fr_read.c
+		src/fr_close.c
+		src/fr_fractol.c
+		src/fr_plot_image.c
+		src/fr_keyboard.c
+		src/fr_mouse.c
+		src/fr_evluate.c src/fr_colors.c)
