@@ -6,11 +6,20 @@
 /*   By: fsmith <fsmith@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/14 15:52:39 by fsmith            #+#    #+#             */
-/*   Updated: 2019/04/14 19:50:22 by fsmith           ###   ########.fr       */
+/*   Updated: 2019/04/15 22:01:43 by fsmith           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fr_fractol.h"
+
+void		fr_set_pixel(t_fractol field, int i)
+{
+	if (field.pts[i].x >= 0 && field.pts[i].x <= WINDOW_W
+	&& field.pts[i].y >= 0 && field.pts[i].y <= WINDOW_H)
+		*(unsigned int*)(field.svc->image + (field.pts[i].x
+		* (field.svc->bpp)) + (field.pts[i].y * field.svc->s_line))
+		= DEFAULT_COLOR;
+}
 
 void		fdf_set_line(t_fractol field, int start, int end)
 {
@@ -77,37 +86,23 @@ void		fr_plot_image(t_fractol *frc)
 	int		i;
 
 	i = 0;
+//	printf("%d\n", frc->svc->bpp);
 	fr_evaluate(frc);
 	mlx_clear_window(frc->svc->mlx_ptr, frc->svc->win_ptr);
-	while (i <= 10000)
+	while (i <= 7)
 	{
-		mlx_pixel_put(frc->svc->mlx_ptr, frc->svc->win_ptr,
-			(int)frc->pts[i].real, (int)frc->pts[i].imaginary, DEFAULT_COLOR);
-		printf("%i: %f, %f\n",i, frc->pts[i].real, frc->pts[i].imaginary);
+		fr_set_pixel(*frc, i);
+		printf("%d: %d, %d\n",i, frc->pts[i].x, frc->pts[i].y);
+//		mlx_pixel_put(frc->svc->mlx_ptr, frc->svc->win_ptr,
+//			(int)frc->pts[i].r, (int)frc->pts[i].i, DEFAULT_COLOR);
+//		printf("%i: %f, %f\n",i, frc->pts[i].real, frc->pts[i].imaginary);
 		i++;
 	}
-
-//	frc->svc->img_ptr = mlx_new_image(frc->svc->mlx_ptr, WINDOW_W, WINDOW_H);
-//	frc->svc->image = mlx_get_data_addr(frc->svc->img_ptr, &frc->svc->bpp,
-//										&frc->svc->s_line, &frc->svc->endian);
-//	i = 0;
-//	while (i++ < frc->width * frc->height)
-//	mlx_pixel_put(frc->svc->mlx_ptr, frc->svc->win_ptr,
-//				  (int)50, (int)50, DEFAULT_COLOR);
-//		if (i % (frc->width * frc->height) != 0)
-//		{
-//			if ((frc->height) * (frc->width) - i < frc->width)
-//				fdf_set_line(*frc, i, i + 1);
-//			else if ((i % (frc->width)) == 0 && i != 0)
-//				fdf_set_line(*frc, i, i + frc->width);
-//			else
-//			{
-//				fdf_set_line(*frc, i, i + frc->width);
-//				fdf_set_line(*frc, i, i + 1);
-//			}
-//		}
-//	mlx_put_image_to_window(frc->svc->mlx_ptr, frc->svc->win_ptr,
-//							frc->svc->img_ptr, 0, 0);
-//	mlx_destroy_image(frc->svc->mlx_ptr, frc->svc->img_ptr);
+	frc->svc->img_ptr = mlx_new_image(frc->svc->mlx_ptr, WINDOW_W, WINDOW_H);
+	frc->svc->image = mlx_get_data_addr(frc->svc->img_ptr,
+		&frc->svc->bpp,	&frc->svc->s_line, &frc->svc->endian);
+	mlx_put_image_to_window(frc->svc->mlx_ptr, frc->svc->win_ptr,
+							frc->svc->img_ptr, 0, 0);
+	mlx_destroy_image(frc->svc->mlx_ptr, frc->svc->img_ptr);
 //	fdf_field_info(*frc);
 }

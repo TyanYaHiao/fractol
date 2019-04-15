@@ -6,7 +6,7 @@
 /*   By: fsmith <fsmith@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/14 14:57:26 by fsmith            #+#    #+#             */
-/*   Updated: 2019/04/14 20:00:09 by fsmith           ###   ########.fr       */
+/*   Updated: 2019/04/15 21:39:10 by fsmith           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@
 # define TEXT_COLOR			0x00cdcd
 # define WINDOW_H			1400
 # define WINDOW_W			1800
-# define MAX_ITERATIONS		1
+# define MAX_ITERATIONS		2
 
 # define MANDELBROT			1
 # define JULIA				2
@@ -72,8 +72,10 @@
 
 typedef struct		s_points
 {
-	double 			real;
-	double 			imaginary;
+	int 			x;
+	int 			y;
+	double 			r;
+	double 			i;
 	int 			iterations;
 	int				color;
 }					t_points;
@@ -94,18 +96,18 @@ typedef struct		s_fractol
 {
 	u_int8_t		type;
 
-	double			angle_x;
-	double			angle_y;
-	double			angle_z;
-	int				offset_x;
-	int				offset_y;
-	int				coeff_z;
-	int				width;
-	int				height;
-	int				color_shift;
-	int				color_height;
-	double			max_z;
-	double			min_z;
+//	double			angle_x;
+//	double			angle_y;
+//	double			angle_z;
+//	int				offset_x;
+//	int				offset_y;
+//	int				coeff_z;
+//	int				width;
+//	int				height;
+//	int				color_shift;
+//	int				color_height;
+//	double			max_z;
+//	double			min_z;
 
 
 	double			scale;
