@@ -95,7 +95,8 @@ add_executable(fractol
 		src/fr_plot_image.c
 		src/fr_keyboard.c
 		src/fr_mouse.c
-		src/fr_evluate.c src/fr_colors.c)
+		src/fr_evluate.c
+		src/fr_colors.c)
 
 #block for Mojave:
 target_link_libraries(fractol mlx ${OPEN_GL} ${APP_KIT})

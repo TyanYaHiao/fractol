@@ -6,7 +6,7 @@
 /*   By: fsmith <fsmith@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/14 14:57:26 by fsmith            #+#    #+#             */
-/*   Updated: 2019/04/15 21:39:10 by fsmith           ###   ########.fr       */
+/*   Updated: 2019/04/19 20:09:29 by fsmith           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@
 # define TEXT_COLOR			0x00cdcd
 # define WINDOW_H			1400
 # define WINDOW_W			1800
-# define MAX_ITERATIONS		2
+# define MAX_ITERATIONS		1
 
 # define MANDELBROT			1
 # define JULIA				2

@@ -16,7 +16,7 @@ void 	fr_init_fractol(t_fractol *fractol)
 {
 //
 	fractol->scale = 100;
-	fractol->pts = (t_points*)malloc(sizeof(t_points) * 1000 * 1000);
+	fractol->pts = (t_points*)malloc(sizeof(t_points) * 10000 * 1000);
 	fractol->svc = (t_service*)malloc(sizeof(t_service));
 	fractol->svc->mlx_ptr = mlx_init();
 	fractol->svc->win_ptr = mlx_new_window(fractol->svc->mlx_ptr,
@@ -25,4 +25,7 @@ void 	fr_init_fractol(t_fractol *fractol)
 		WINDOW_H);
 	fractol->svc->image = mlx_get_data_addr(fractol->svc->img_ptr,
 		&fractol->svc->bpp, &fractol->svc->s_line, &fractol->svc->endian);
+//	frc->svc->img_ptr = mlx_new_image(frc->svc->mlx_ptr, WINDOW_W, WINDOW_H);
+//	frc->svc->image = mlx_get_data_addr(frc->svc->img_ptr,
+
 }
