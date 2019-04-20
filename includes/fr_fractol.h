@@ -6,7 +6,7 @@
 /*   By: fsmith <fsmith@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/14 14:57:26 by fsmith            #+#    #+#             */
-/*   Updated: 2019/04/19 20:09:29 by fsmith           ###   ########.fr       */
+/*   Updated: 2019/04/20 17:23:13 by fsmith           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,10 @@
 # define TEXT_COLOR			0x00cdcd
 # define WINDOW_H			1400
 # define WINDOW_W			1800
-# define MAX_ITERATIONS		1
+# define START_SCALE		150
+# define MAX_ITERATIONS		100
+# define STEP_X				10000
+# define STEP_Y				1000
 
 # define MANDELBROT			1
 # define JULIA				2
@@ -124,6 +127,7 @@ int 		fr_analyse_fractal(char *fractal, t_fractol *fractol);
 void 		fr_init_fractol(t_fractol *fractol);
 void		fr_plot_image(t_fractol *fractol);
 void		fr_evaluate(t_fractol *frc);
+void		fr_mandelbrot(t_fractol *frc);
 int			fr_keyboard_press(int keycode, t_fractol *frc);
 int			fr_keyboard_key_check(int keycode);
 int			fr_keyboard_release(int keycode, t_fractol *frc);
