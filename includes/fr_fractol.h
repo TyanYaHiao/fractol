@@ -6,7 +6,7 @@
 /*   By: fsmith <fsmith@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/14 14:57:26 by fsmith            #+#    #+#             */
-/*   Updated: 2019/04/21 17:57:57 by fsmith           ###   ########.fr       */
+/*   Updated: 2019/04/21 19:34:54 by fsmith           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@
 # define TEXT_COLOR			0x00cdcd
 # define WINDOW_H			1400
 # define WINDOW_W			1800
-# define START_SCALE		130
+# define START_SCALE		200
 # define MAX_ITERATIONS		100
 # define STEP_X				10000
 # define STEP_Y				1000
@@ -39,6 +39,7 @@
 # define MOUSE				2
 
 # define MOUSE_LEFT_BUTTON	1
+# define MOUSE_RIGHT_BUTTON	2
 # define MOUSE_BUTTON_MID	3
 # define MOUSE_SCROLL_UP	4
 # define MOUSE_SCROLL_DOWN	5
@@ -110,8 +111,7 @@ typedef struct		s_fractol
 //	double			angle_x;
 //	double			angle_y;
 //	double			angle_z;
-//	int				offset_x;
-//	int				offset_y;
+
 //	int				coeff_z;
 //	int				width;
 //	int				height;
@@ -122,6 +122,8 @@ typedef struct		s_fractol
 
 	int 			mouse_x;
 	int 			mouse_y;
+	double			offset_x;
+	double			offset_y;
 	double			scale;
 	t_points		*pts;
 	t_service		*svc;

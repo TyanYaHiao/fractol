@@ -6,7 +6,7 @@
 /*   By: fsmith <fsmith@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/14 16:37:14 by fsmith            #+#    #+#             */
-/*   Updated: 2019/04/21 19:09:56 by fsmith           ###   ########.fr       */
+/*   Updated: 2019/04/21 19:10:33 by fsmith           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,8 +91,8 @@ void		fr_explanation(t_fractol *frc)
 	i = (double)(frc->mouse_y - WINDOW_H / 2) / START_SCALE;
 	while (n < 100)
 	{
-		temp_r = r * r - i * i;
-		temp_i = 2 * r * i;
+		temp_r = r * r - i * i + frc->offset_x;
+		temp_i = 2 * r * i + frc->offset_y;
 		frc->pts[n].r = temp_r;
 		frc->pts[n].i = temp_i;
 		frc->pts[n].x = (int)(frc->pts[n].r * START_SCALE + WINDOW_W / 2);

@@ -6,7 +6,7 @@
 /*   By: fsmith <fsmith@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/14 16:18:53 by fsmith            #+#    #+#             */
-/*   Updated: 2019/04/21 18:52:35 by fsmith           ###   ########.fr       */
+/*   Updated: 2019/04/21 18:52:45 by fsmith           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,11 @@ int			fr_mouse_press(int button, int x, int y, t_fractol *frc)
 		mlx_clear_window((*frc).svc->mlx_ptr, (*frc).svc->win_ptr);
 		fr_evaluate(frc);
 		fr_plot_image(frc);
+	}
+	if (button == MOUSE_RIGHT_BUTTON)
+	{
+		frc->offset_x = ((double)x - WINDOW_W / 2 ) / START_SCALE;
+		frc->offset_y = ((double)y - WINDOW_H / 2 ) / START_SCALE;
 	}
 	if (button == MOUSE_BUTTON_MID)
 	{
