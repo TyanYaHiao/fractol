@@ -39,6 +39,8 @@ int 	fr_analyse_fractal(char *fractal, t_fractol *fractol)
 		fractol->type = TURTLE;
 	else if (!(ft_strcmp(fractal, "Island")))
 		fractol->type = ISLAND;
+	else if (!(ft_strcmp(fractal, "Explanation")))
+		fractol->type = EXPLANATION;
 	else
 		return (0);
 	return (1);

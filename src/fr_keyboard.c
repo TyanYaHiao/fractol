@@ -6,7 +6,7 @@
 /*   By: fsmith <fsmith@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/14 16:12:52 by fsmith            #+#    #+#             */
-/*   Updated: 2019/04/14 16:26:30 by fsmith           ###   ########.fr       */
+/*   Updated: 2019/04/21 17:49:14 by fsmith           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,13 @@ int			fr_keyboard_press(int keycode, t_fractol *frc)
 	{
 		if (keycode == KEY_ESC)
 			exit(0);
+		if (keycode == KEY_Q)
+		{
+			frc->svc->img_ptr = mlx_new_image(frc->svc->mlx_ptr, WINDOW_W, WINDOW_H);
+			frc->svc->image = mlx_get_data_addr(frc->svc->img_ptr,
+				&frc->svc->bpp,	&frc->svc->s_line, &frc->svc->endian);
+			frc->clean_window = !frc->clean_window;
+		}
 //		mlx_clear_window((*frc).svc->mlx_ptr, (*frc).svc->win_ptr);
 //		fr_keyboard_key_letter(keycode, frc);
 //		if (keycode == KEY_NUM_LEFT || keycode == KEY_NUM_RIGHT ||

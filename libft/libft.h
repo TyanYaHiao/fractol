@@ -6,7 +6,7 @@
 /*   By: fsmith <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/01 19:27:25 by fsmith            #+#    #+#             */
-/*   Updated: 2019/04/02 15:26:56 by mlurker          ###   ########.fr       */
+/*   Updated: 2019/04/21 18:22:17 by fsmith           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,5 +106,6 @@ int					ft_atoi_hex(char *str);
 double				ft_round_double(double x);
 double				ft_abs_double(double x0, double x1);
 void				ft_switch_bool(int *value);
+char				*ft_dtoa(double n, size_t precision);
 
 #endif

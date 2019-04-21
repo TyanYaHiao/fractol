@@ -6,7 +6,7 @@
 /*   By: fsmith <fsmith@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/14 16:18:53 by fsmith            #+#    #+#             */
-/*   Updated: 2019/04/14 16:22:22 by fsmith           ###   ########.fr       */
+/*   Updated: 2019/04/21 18:52:35 by fsmith           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,22 @@
 
 int			fr_mouse_press(int button, int x, int y, t_fractol *frc)
 {
+	if (button == MOUSE_LEFT_BUTTON)
+	{
+		frc->ctrl->mouse_left_button = TRUE;
+		frc->mouse_x = x;
+		frc->mouse_y = y;
+		mlx_clear_window((*frc).svc->mlx_ptr, (*frc).svc->win_ptr);
+		fr_evaluate(frc);
+		fr_plot_image(frc);
+	}
+	if (button == MOUSE_BUTTON_MID)
+	{
+		mlx_clear_window((*frc).svc->mlx_ptr, (*frc).svc->win_ptr);
+	}
+
+
+
 //	if (button == MOUSE_SCROLL_UP || button == MOUSE_SCROLL_DOWN
 //		|| button == MOUSE_BUTTON_MID)
 //	{
@@ -43,6 +59,10 @@ int			fr_mouse_press(int button, int x, int y, t_fractol *frc)
 
 int			fr_mouse_release(int button, int x, int y, t_fractol *frc)
 {
+	if (button == MOUSE_LEFT_BUTTON)
+	{
+		frc->ctrl->mouse_left_button = FALSE;
+	}
 //	x++;
 //	y++;
 //	if (button == MOUSE_BUTTON_MID)
@@ -72,6 +92,15 @@ int			fr_mouse_release(int button, int x, int y, t_fractol *frc)
 
 int			fr_mouse_move(int x, int y, t_fractol *frc)
 {
+	if (frc->ctrl->mouse_left_button == TRUE)
+	{
+		frc->mouse_x = x;
+		frc->mouse_y = y;
+		mlx_clear_window((*frc).svc->mlx_ptr, (*frc).svc->win_ptr);
+		fr_evaluate(frc);
+		fr_plot_image(frc);
+	}
+
 //	if (fdf->control->mouse_button_mid == TRUE)
 //	{
 //		if (fdf->control->prev_x == 0)

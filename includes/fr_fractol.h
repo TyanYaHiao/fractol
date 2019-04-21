@@ -6,7 +6,7 @@
 /*   By: fsmith <fsmith@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/14 14:57:26 by fsmith            #+#    #+#             */
-/*   Updated: 2019/04/20 17:23:13 by fsmith           ###   ########.fr       */
+/*   Updated: 2019/04/21 17:57:57 by fsmith           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@
 # define TEXT_COLOR			0x00cdcd
 # define WINDOW_H			1400
 # define WINDOW_W			1800
-# define START_SCALE		150
+# define START_SCALE		130
 # define MAX_ITERATIONS		100
 # define STEP_X				10000
 # define STEP_Y				1000
@@ -33,10 +33,12 @@
 # define JULIA				2
 # define TURTLE				3
 # define ISLAND				4
+# define EXPLANATION		5
 
 # define KEYBOARD			1
 # define MOUSE				2
 
+# define MOUSE_LEFT_BUTTON	1
 # define MOUSE_BUTTON_MID	3
 # define MOUSE_SCROLL_UP	4
 # define MOUSE_SCROLL_DOWN	5
@@ -83,6 +85,11 @@ typedef struct		s_points
 	int				color;
 }					t_points;
 
+typedef struct		s_control
+{
+	int 			mouse_left_button;
+}					t_control;
+
 typedef struct		s_service
 {
 	void			*mlx_ptr;
@@ -98,6 +105,7 @@ typedef struct		s_service
 typedef struct		s_fractol
 {
 	u_int8_t		type;
+	int 			clean_window;
 
 //	double			angle_x;
 //	double			angle_y;
@@ -112,10 +120,12 @@ typedef struct		s_fractol
 //	double			max_z;
 //	double			min_z;
 
-
+	int 			mouse_x;
+	int 			mouse_y;
 	double			scale;
 	t_points		*pts;
 	t_service		*svc;
+	t_control		*ctrl;
 //	t_curr			*current;
 //	t_control		*control;
 //	t_point			*points_mem;
@@ -128,12 +138,14 @@ void 		fr_init_fractol(t_fractol *fractol);
 void		fr_plot_image(t_fractol *fractol);
 void		fr_evaluate(t_fractol *frc);
 void		fr_mandelbrot(t_fractol *frc);
+void		fr_explanation(t_fractol *frc);
 int			fr_keyboard_press(int keycode, t_fractol *frc);
 int			fr_keyboard_key_check(int keycode);
 int			fr_keyboard_release(int keycode, t_fractol *frc);
 int			fr_mouse_press(int button, int x, int y, t_fractol *frc);
 int			fr_mouse_release(int button, int x, int y, t_fractol *frc);
 int			fr_mouse_move(int x, int y, t_fractol *frc);
+void		fr_info(t_fractol *frc);
 int			fr_close(void *param);
 int 		fr_color(t_fractol *fractol, int n);
 
