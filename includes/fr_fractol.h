@@ -6,7 +6,7 @@
 /*   By: fsmith <fsmith@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/14 14:57:26 by fsmith            #+#    #+#             */
-/*   Updated: 2019/04/21 19:34:54 by fsmith           ###   ########.fr       */
+/*   Updated: 2019/04/22 21:23:33 by fsmith           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,10 +120,10 @@ typedef struct		s_fractol
 //	double			max_z;
 //	double			min_z;
 
-	int 			mouse_x;
-	int 			mouse_y;
-	double			offset_x;
-	double			offset_y;
+	int 			number_x;
+	int 			number_y;
+	double			coeff_x;
+	double			coeff_y;
 	double			scale;
 	t_points		*pts;
 	t_service		*svc;
@@ -137,6 +137,7 @@ typedef struct		s_fractol
 int 		fr_read(int argc, char **argv, t_fractol *fractol);
 int 		fr_analyse_fractal(char *fractal, t_fractol *fractol);
 void 		fr_init_fractol(t_fractol *fractol);
+void		fr_set_pixel(t_fractol frc, int i);
 void		fr_plot_image(t_fractol *fractol);
 void		fr_evaluate(t_fractol *frc);
 void		fr_julia(t_fractol *frc);

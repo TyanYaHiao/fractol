@@ -6,7 +6,7 @@
 /*   By: fsmith <fsmith@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/14 15:46:40 by fsmith            #+#    #+#             */
-/*   Updated: 2019/04/21 18:54:43 by fsmith           ###   ########.fr       */
+/*   Updated: 2019/04/22 21:23:43 by fsmith           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,10 @@ void 	fr_init_fractol(t_fractol *fractol)
 {
 //
 	fractol->clean_window = FALSE;
-	fractol->mouse_x = WINDOW_W / 2;
-	fractol->mouse_y = WINDOW_H / 2;
-	fractol->offset_x = 0;
-	fractol->offset_y = 0;
+	fractol->number_x = WINDOW_W / 2;
+	fractol->number_y = WINDOW_H / 2;
+	fractol->coeff_x = 0;
+	fractol->coeff_y = 0;
 	fractol->scale = START_SCALE;
 	fractol->pts = (t_points*)malloc(sizeof(t_points) * STEP_X * STEP_Y);
 	fractol->svc = (t_service*)malloc(sizeof(t_service));
