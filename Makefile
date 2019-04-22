@@ -6,12 +6,13 @@
 #    By: fsmith <fsmith@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/02/19 19:52:14 by fsmith            #+#    #+#              #
-#    Updated: 2019/04/13 17:53:38 by fsmith           ###   ########.fr        #
+#    Updated: 2019/04/22 20:12:42 by fsmith           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME :=			fractol
 
+override G +=
 SRC_PATH :=		src/
 INC_PATH :=		includes/
 LIB_PATH :=		libft/
@@ -60,5 +61,10 @@ mfclean:
 	rm -f $(NAME)
 	rm -rf $(OBJ_PATH)
 mre: mfclean all
+
+git:
+	git add .
+	git commit -am "$(G)"
+	git push
 
 .PHONY: $(LIB) all clean fclean re mclean mfclean mre
