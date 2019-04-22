@@ -139,6 +139,7 @@ int 		fr_analyse_fractal(char *fractal, t_fractol *fractol);
 void 		fr_init_fractol(t_fractol *fractol);
 void		fr_plot_image(t_fractol *fractol);
 void		fr_evaluate(t_fractol *frc);
+void		fr_julia(t_fractol *frc);
 void		fr_mandelbrot(t_fractol *frc);
 void		fr_explanation(t_fractol *frc);
 int			fr_keyboard_press(int keycode, t_fractol *frc);

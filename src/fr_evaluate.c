@@ -6,7 +6,7 @@
 /*   By: fsmith <fsmith@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/14 16:37:14 by fsmith            #+#    #+#             */
-/*   Updated: 2019/04/21 19:10:33 by fsmith           ###   ########.fr       */
+/*   Updated: 2019/04/22 19:58:15 by fsmith           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,14 @@ void		fr_evaluate(t_fractol *frc)
 //		frc->pts[n].color = 0xFF0000 * frc->pts[n].iterations / 20;
 //		n++;
 //	}
-	fr_explanation(frc);
+	if (frc->type == EXPLANATION)
+	{
+		fr_explanation(frc);
+	}
+	else if (frc->type == JULIA)
+	{
+		fr_julia(frc);
+	}
 }
 
 void		fr_mandelbrot(t_fractol *frc)
@@ -124,4 +131,9 @@ void		fr_explanation(t_fractol *frc)
 			n++;
 		}
 	}
+}
+
+void		fr_julia(t_fractol *frc)
+{
+
 }

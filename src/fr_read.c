@@ -6,7 +6,7 @@
 /*   By: fsmith <fsmith@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/14 15:31:05 by fsmith            #+#    #+#             */
-/*   Updated: 2019/04/14 19:08:15 by fsmith           ###   ########.fr       */
+/*   Updated: 2019/04/22 19:50:31 by fsmith           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ int 	fr_read(int argc, char **argv, t_fractol *fractol)
 //		ft_putendl("          Island");
 //		return (0);
 //	}
+	fr_analyse_fractal(argv[1], fractol);
 	fr_init_fractol(fractol);
 //	ft_strcpy(fractol->svc->map_name, argv[1]);
 	return (1);
