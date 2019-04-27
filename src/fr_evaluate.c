@@ -6,7 +6,7 @@
 /*   By: fsmith <fsmith@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/14 16:37:14 by fsmith            #+#    #+#             */
-/*   Updated: 2019/04/27 16:45:11 by fsmith           ###   ########.fr       */
+/*   Updated: 2019/04/27 17:28:32 by fsmith           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,8 +89,8 @@ void		fr_julia(t_fractol *frc)
 	int 	i;
 	int 	color;
 
-	c_r = (double)(frc->coeff_x - WINDOW_W / 2) / START_SCALE;
-	c_i = (double)(frc->coeff_y - WINDOW_H / 2) / START_SCALE;
+	c_r = (double)(frc->coeff_x - WINDOW_W / 2) / frc->scale;
+	c_i = (double)(frc->coeff_y - WINDOW_H / 2) / frc->scale;
 	x = 0;
 	while (x < WINDOW_W)
 	{
@@ -98,8 +98,8 @@ void		fr_julia(t_fractol *frc)
 		while (y < WINDOW_H)
 		{
 			i = 0;
-			n_r = (double)(x - WINDOW_W / 2) / START_SCALE;
-			n_i = (double)(y - WINDOW_H / 2) / START_SCALE;
+			n_r = (double)(x - WINDOW_W / 2) / frc->scale;
+			n_i = (double)(y - WINDOW_H / 2) / frc->scale;
 			temp_x = x;
 			temp_y = y;
 			while (i < MAX_ITERATIONS && temp_x >= 0 && temp_y >= 0
@@ -116,10 +116,22 @@ void		fr_julia(t_fractol *frc)
 			if (i == MAX_ITERATIONS)
 				color = 0x000000;
 			else
-				color = 0x0000FF / 0xF * i;
+//				color = (0x0000FF / 0xF * i) << 16;
+				color = (0xFF0000 / MAX_ITERATIONS * i);
 			fr_set_pixel2(*frc, x, y, color);
 			y++;
 		}
 		x++;
 	}
+}
+
+void		fr_scale_image(int mode, int keycode, t_fractol *frc)
+{
+	if ((mode == KEYBOARD && keycode == KEY_PLUS)
+		|| (mode == MOUSE && keycode == MOUSE_SCROLL_UP))
+		frc->scale *= 1.2;
+	else if ((mode == KEYBOARD && keycode == KEY_MINUS)
+			 || (mode == MOUSE && keycode == MOUSE_SCROLL_DOWN))
+		frc->scale /= 1.2;
+	fr_plot_image(frc);
 }
