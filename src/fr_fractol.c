@@ -15,7 +15,7 @@
 void 	fr_init_fractol(t_fractol *fractol)
 {
 //
-	fractol->clean_window = FALSE;
+	fractol->clean_window = TRUE;
 	fractol->number_x = WINDOW_W / 2;
 	fractol->number_y = WINDOW_H / 2;
 	fractol->coeff_x = 0;
@@ -33,6 +33,4 @@ void 	fr_init_fractol(t_fractol *fractol)
 		&fractol->svc->bpp, &fractol->svc->s_line, &fractol->svc->endian);
 	fractol->ctrl = (t_control*)malloc(sizeof(t_control));
 	fractol->ctrl->mouse_left_button = FALSE;
-//	frc->svc->img_ptr = mlx_new_image(frc->svc->mlx_ptr, WINDOW_W, WINDOW_H);
-//	frc->svc->image = mlx_get_data_addr(frc->svc->img_ptr,
 }

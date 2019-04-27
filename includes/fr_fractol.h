@@ -6,7 +6,7 @@
 /*   By: fsmith <fsmith@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/14 14:57:26 by fsmith            #+#    #+#             */
-/*   Updated: 2019/04/22 21:23:33 by fsmith           ###   ########.fr       */
+/*   Updated: 2019/04/27 16:17:30 by fsmith           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@
 # define WINDOW_H			1400
 # define WINDOW_W			1800
 # define START_SCALE		200
-# define MAX_ITERATIONS		100
+# define MAX_ITERATIONS		255
 # define STEP_X				10000
 # define STEP_Y				1000
 
@@ -138,6 +138,7 @@ int 		fr_read(int argc, char **argv, t_fractol *fractol);
 int 		fr_analyse_fractal(char *fractal, t_fractol *fractol);
 void 		fr_init_fractol(t_fractol *fractol);
 void		fr_set_pixel(t_fractol frc, int i);
+void		fr_set_pixel2(t_fractol frc, int x, int y, int color);
 void		fr_plot_image(t_fractol *fractol);
 void		fr_evaluate(t_fractol *frc);
 void		fr_julia(t_fractol *frc);

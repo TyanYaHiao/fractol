@@ -6,7 +6,7 @@
 /*   By: fsmith <fsmith@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/14 15:52:39 by fsmith            #+#    #+#             */
-/*   Updated: 2019/04/22 20:59:13 by fsmith           ###   ########.fr       */
+/*   Updated: 2019/04/27 17:02:04 by fsmith           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,16 @@ void		fr_set_pixel(t_fractol frc, int i)
 	if (frc.pts[i].x >= 0 && frc.pts[i].x <= WINDOW_W
 	&& frc.pts[i].y >= 0 && frc.pts[i].y <= WINDOW_H)
 		tmp[WINDOW_W * frc.pts[i].y + frc.pts[i].x] = frc.pts[i].color;
+}
+
+void		fr_set_pixel2(t_fractol frc, int x, int y, int color)
+{
+	int 	*tmp;
+
+	tmp = (int*)frc.svc->image;
+	if (x >= 0 && x <= WINDOW_W
+		&& y >= 0 && y <= WINDOW_H)
+		tmp[WINDOW_W * y + x] = color;
 }
 
 void		fdf_set_line(t_fractol field, int start, int end)
@@ -93,17 +103,11 @@ void		fr_plot_image(t_fractol *frc)
 	{
 		frc->svc->img_ptr = mlx_new_image(frc->svc->mlx_ptr, WINDOW_W, WINDOW_H);
 		frc->svc->image = mlx_get_data_addr(frc->svc->img_ptr,
-											&frc->svc->bpp,	&frc->svc->s_line, &frc->svc->endian);
+			&frc->svc->bpp,	&frc->svc->s_line, &frc->svc->endian);
 	}
 	fr_evaluate(frc);
-
-	while (i < 100)
-	{
-		fr_set_pixel(*frc, i);
-		i++;
-	}
 	mlx_put_image_to_window(frc->svc->mlx_ptr, frc->svc->win_ptr,
-							frc->svc->img_ptr, 0, 0);
+		frc->svc->img_ptr, 0, 0);
 	if (frc->clean_window)
 	{
 		mlx_destroy_image(frc->svc->mlx_ptr, frc->svc->img_ptr);
