@@ -6,7 +6,7 @@
 /*   By: fsmith <fsmith@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/14 14:57:26 by fsmith            #+#    #+#             */
-/*   Updated: 2019/04/28 17:17:08 by fsmith           ###   ########.fr       */
+/*   Updated: 2019/04/28 20:29:24 by fsmith           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,10 @@
 
 # define DEFAULT_COLOR		0xFF6b6b
 # define TEXT_COLOR			0x00cdcd
-# define WINDOW_H			1400
-# define WINDOW_W			1800
+# define WINDOW_H			900
+# define WINDOW_W			1200
 # define START_SCALE		200
-# define MAX_ITERATIONS		100
+# define MAX_ITERATIONS		255
 # define THREADS			16
 # define STEP_X				10000
 # define STEP_Y				1000
@@ -78,19 +78,12 @@
 # define KEY_NUM_LEFT		123
 # define KEY_NUM_RIGHT		124
 
-typedef struct		s_points
-{
-	int 			x;
-	int 			y;
-	double 			r;
-	double 			i;
-	int 			iterations;
-	int				color;
-}					t_points;
-
 typedef struct		s_control
 {
 	int 			mouse_left_button;
+	int 			mouse_right_button;
+	int 			prev_x;
+	int 			prev_y;
 }					t_control;
 
 typedef struct		s_service
@@ -109,31 +102,21 @@ typedef struct		s_fractol
 {
 	u_int8_t		type;
 	int 			clean_window;
-
-//	double			angle_x;
-//	double			angle_y;
-//	double			angle_z;
-
-//	int				coeff_z;
-//	int				width;
-//	int				height;
 //	int				color_shift;
 //	int				color_height;
-//	double			max_z;
-//	double			min_z;
 
-	int 			number_x;
-	int 			number_y;
+//	int 			number_x;
+//	int 			number_y;
+
+	int 			offset_x;
+	int 			offset_y;
 	double			coeff_x;
 	double			coeff_y;
 	double			scale;
-	t_points		*pts;
 	t_service		*svc;
 	t_control		*ctrl;
 //	t_curr			*current;
 //	t_control		*control;
-//	t_point			*points_mem;
-//	t_point			*points_out;
 }					t_fractol;
 
 typedef struct		s_tdata
@@ -151,6 +134,7 @@ void		fr_set_pixel2(t_fractol frc, int x, int y, int color);
 void		fr_plot_image(t_fractol *fractol);
 void		fr_evaluate(t_fractol *frc);
 void*		fr_thread_julia(void* thread_data);
+void*		fr_thread_mandelbrot(void* thread_data);
 void		fr_scale_image(int mode, int keycode, t_fractol *frc);
 void		fr_julia(t_fractol *frc);
 void		fr_mandelbrot(t_fractol *frc);

@@ -14,12 +14,12 @@
 
 void		fr_set_pixel(t_fractol frc, int i)
 {
-	int 	*tmp;
-
-	tmp = (int*)frc.svc->image;
-	if (frc.pts[i].x >= 0 && frc.pts[i].x <= WINDOW_W
-	&& frc.pts[i].y >= 0 && frc.pts[i].y <= WINDOW_H)
-		tmp[WINDOW_W * frc.pts[i].y + frc.pts[i].x] = frc.pts[i].color;
+//	int 	*tmp;
+//
+//	tmp = (int*)frc.svc->image;
+//	if (frc.pts[i].x >= 0 && frc.pts[i].x <= WINDOW_W
+//	&& frc.pts[i].y >= 0 && frc.pts[i].y <= WINDOW_H)
+//		tmp[WINDOW_W * frc.pts[i].y + frc.pts[i].x] = frc.pts[i].color;
 }
 
 void		fr_set_pixel2(t_fractol frc, int x, int y, int color)

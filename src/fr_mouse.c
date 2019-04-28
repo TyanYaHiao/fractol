@@ -6,7 +6,7 @@
 /*   By: fsmith <fsmith@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/14 16:18:53 by fsmith            #+#    #+#             */
-/*   Updated: 2019/04/27 17:13:58 by fsmith           ###   ########.fr       */
+/*   Updated: 2019/04/28 19:39:09 by fsmith           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,14 @@
 
 int			fr_mouse_press(int button, int x, int y, t_fractol *frc)
 {
+	if (button == MOUSE_LEFT_BUTTON)
+		frc->ctrl->mouse_left_button = TRUE;
+	if (button == MOUSE_RIGHT_BUTTON)
+		frc->ctrl->mouse_right_button = TRUE;
 	if (frc->type == EXPLANATION)
 	{
 		if (button == MOUSE_LEFT_BUTTON)
 		{
-			frc->ctrl->mouse_left_button = TRUE;
-			frc->number_x = x;
-			frc->number_y = y;
 			mlx_clear_window((*frc).svc->mlx_ptr, (*frc).svc->win_ptr);
 			fr_evaluate(frc);
 			fr_plot_image(frc);
@@ -80,7 +81,11 @@ int			fr_mouse_release(int button, int x, int y, t_fractol *frc)
 	if (button == MOUSE_LEFT_BUTTON)
 	{
 		frc->ctrl->mouse_left_button = FALSE;
+		frc->ctrl->prev_x = 0;
+		frc->ctrl->prev_y = 0;
 	}
+	else if (button == MOUSE_RIGHT_BUTTON)
+		frc->ctrl->mouse_right_button = FALSE;
 	return (0);
 }
 
@@ -90,8 +95,6 @@ int			fr_mouse_move(int x, int y, t_fractol *frc)
 	{
 		if (frc->ctrl->mouse_left_button == TRUE)
 		{
-			frc->number_x = x;
-			frc->number_y = y;
 			fr_plot_image(frc);
 		}
 	}
@@ -99,6 +102,21 @@ int			fr_mouse_move(int x, int y, t_fractol *frc)
 	{
 		frc->coeff_x = x;
 		frc->coeff_y = y;
+		fr_plot_image(frc);
+	}
+	else if (frc->type == MANDELBROT)
+	{
+		if (frc->ctrl->mouse_left_button)
+		{
+			if (frc->ctrl->prev_x == 0)
+				frc->ctrl->prev_x = x;
+			if (frc->ctrl->prev_y == 0)
+				frc->ctrl->prev_y = y;
+			frc->offset_x += x - frc->ctrl->prev_x;
+			frc->offset_y += y - frc->ctrl->prev_y;
+			frc->ctrl->prev_x = x;
+			frc->ctrl->prev_y = y;
+		}
 		fr_plot_image(frc);
 	}
 	return (0);
