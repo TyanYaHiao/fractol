@@ -23,7 +23,6 @@ void 	fr_init_fractol(t_fractol *fractol)
 	fractol->scale = START_SCALE;
 	fractol->pts = (t_points*)malloc(sizeof(t_points) * STEP_X * STEP_Y);
 	fractol->svc = (t_service*)malloc(sizeof(t_service));
-
 	fractol->svc->mlx_ptr = mlx_init();
 	fractol->svc->win_ptr = mlx_new_window(fractol->svc->mlx_ptr,
 		WINDOW_W, WINDOW_H, "Fract'ol");

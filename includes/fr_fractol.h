@@ -6,7 +6,7 @@
 /*   By: fsmith <fsmith@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/14 14:57:26 by fsmith            #+#    #+#             */
-/*   Updated: 2019/04/27 17:07:57 by fsmith           ###   ########.fr       */
+/*   Updated: 2019/04/28 17:17:08 by fsmith           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 # include <fcntl.h>
 # include <math.h>
 # include <stdio.h>
+# include <pthread.h>
 
 # define DEFAULT_COLOR		0xFF6b6b
 # define TEXT_COLOR			0x00cdcd
@@ -26,6 +27,7 @@
 # define WINDOW_W			1800
 # define START_SCALE		200
 # define MAX_ITERATIONS		100
+# define THREADS			16
 # define STEP_X				10000
 # define STEP_Y				1000
 
@@ -134,6 +136,13 @@ typedef struct		s_fractol
 //	t_point			*points_out;
 }					t_fractol;
 
+typedef struct		s_tdata
+{
+	int 			start_x;
+	int 			end_x;
+	t_fractol		*frc;
+}					t_tdata;
+
 int 		fr_read(int argc, char **argv, t_fractol *fractol);
 int 		fr_analyse_fractal(char *fractal, t_fractol *fractol);
 void 		fr_init_fractol(t_fractol *fractol);
@@ -141,6 +150,7 @@ void		fr_set_pixel(t_fractol frc, int i);
 void		fr_set_pixel2(t_fractol frc, int x, int y, int color);
 void		fr_plot_image(t_fractol *fractol);
 void		fr_evaluate(t_fractol *frc);
+void*		fr_thread_julia(void* thread_data);
 void		fr_scale_image(int mode, int keycode, t_fractol *frc);
 void		fr_julia(t_fractol *frc);
 void		fr_mandelbrot(t_fractol *frc);

@@ -6,7 +6,7 @@
 /*   By: fsmith <fsmith@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/14 16:37:14 by fsmith            #+#    #+#             */
-/*   Updated: 2019/04/27 17:28:32 by fsmith           ###   ########.fr       */
+/*   Updated: 2019/04/28 17:14:46 by fsmith           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,44 +84,24 @@ void		fr_explanation(t_fractol *frc)
 
 void		fr_julia(t_fractol *frc)
 {
-	double 	n_r, n_i, c_r, c_i, temp_r, temp_i;
-	int		x, y, temp_x, temp_y;
-	int 	i;
-	int 	color;
+	int		i;
 
-	c_r = (double)(frc->coeff_x - WINDOW_W / 2) / frc->scale;
-	c_i = (double)(frc->coeff_y - WINDOW_H / 2) / frc->scale;
-	x = 0;
-	while (x < WINDOW_W)
+	pthread_t* threads = (pthread_t*) malloc(sizeof(pthread_t) * THREADS);
+	t_tdata *data = (t_tdata*)malloc(sizeof(t_tdata) * THREADS);
+	i = 0;
+	while (i < THREADS)
 	{
-		y = 0;
-		while (y < WINDOW_H)
-		{
-			i = 0;
-			n_r = (double)(x - WINDOW_W / 2) / frc->scale;
-			n_i = (double)(y - WINDOW_H / 2) / frc->scale;
-			temp_x = x;
-			temp_y = y;
-			while (i < MAX_ITERATIONS && temp_x >= 0 && temp_y >= 0
-			&& temp_x <= WINDOW_W && temp_y <= WINDOW_H)
-			{
-				temp_r = n_r * n_r - n_i * n_i + c_r;
-				temp_i = 2 * n_r * n_i + c_i;
-				n_r = temp_r;
-				n_i = temp_i;
-				temp_x = (int) n_r * START_SCALE + WINDOW_W / 2;
-				temp_y = (int) n_i * START_SCALE + WINDOW_H / 2;
-				i++;
-			}
-			if (i == MAX_ITERATIONS)
-				color = 0x000000;
-			else
-//				color = (0x0000FF / 0xF * i) << 16;
-				color = (0xFF0000 / MAX_ITERATIONS * i);
-			fr_set_pixel2(*frc, x, y, color);
-			y++;
-		}
-		x++;
+		data[i].start_x = WINDOW_W / THREADS * i;
+		data[i].end_x = WINDOW_W / THREADS * (i + 1);
+		data[i].frc = frc;
+		pthread_create(&(threads[i]), NULL, fr_thread_julia, &data[i]);
+		i++;
+	}
+	i = 0;
+	while (i < THREADS)
+	{
+		pthread_join(threads[i], NULL);
+		i++;
 	}
 }
 
