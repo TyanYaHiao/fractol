@@ -6,7 +6,7 @@
 /*   By: fsmith <fsmith@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/14 16:18:53 by fsmith            #+#    #+#             */
-/*   Updated: 2019/04/28 19:39:09 by fsmith           ###   ########.fr       */
+/*   Updated: 2019/04/29 21:08:00 by fsmith           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,43 +34,27 @@ int			fr_mouse_press(int button, int x, int y, t_fractol *frc)
 			mlx_destroy_image(frc->svc->mlx_ptr, frc->svc->img_ptr);
 			frc->svc->img_ptr = mlx_new_image(frc->svc->mlx_ptr, WINDOW_W, WINDOW_H);
 			frc->svc->image = mlx_get_data_addr(frc->svc->img_ptr,
-												&frc->svc->bpp, &frc->svc->s_line, &frc->svc->endian);
+				&frc->svc->bpp, &frc->svc->s_line, &frc->svc->endian);
 		}
 	}
-//	else if (frc->type == JULIA)
-//	{
-//		if (button == MOUSE_RIGHT_BUTTON)
-//		{
-//			frc->coeff_x = x;
-//			frc->coeff_y = y;
-//			fr_plot_image(frc);
-//		}
-//	}
-
-
-
 	if (button == MOUSE_SCROLL_UP || button == MOUSE_SCROLL_DOWN
 		|| button == MOUSE_BUTTON_MID)
 	{
-//		if (button == MOUSE_BUTTON_MID)
-//			frc->control->mouse_button_mid = TRUE;
 		if (button == MOUSE_SCROLL_UP || button == MOUSE_SCROLL_DOWN)
 		{
-//			mlx_clear_window((*frc).svc->mlx_ptr, (*frc).svc->win_ptr);
-			if (button == MOUSE_SCROLL_UP || button == MOUSE_SCROLL_DOWN)
+			if (button == MOUSE_SCROLL_UP)
 			{
-//				if (button == MOUSE_SCROLL_UP)
-//				{
-//					frc->offset_x -= ((x - WINDOW_W / 2) / 3);
-//					fdf->offset_y -= ((y - WINDOW_H / 2) / 3);
-//				}
-//				if (button == MOUSE_SCROLL_DOWN)
-//				{
-//					fdf->offset_x -= ((x - WINDOW_W / 2) / 10);
-//					fdf->offset_y -= ((y - WINDOW_H / 2) / 10);
-//				}
-				fr_scale_image(MOUSE, button, frc);
+				frc->offset_x += (int)((x - WINDOW_W / 2) / frc->scale);
+				frc->offset_y += (int)((y - WINDOW_W / 2) / frc->scale);
+//				frc->offset_x += 10;
+//				frc->offset_y += 10;
 			}
+			else
+			{
+				frc->offset_x -= (int)((x - WINDOW_W / 2) / frc->scale);
+				frc->offset_y -= (int)((y - WINDOW_W / 2) / frc->scale);
+			}
+				fr_scale_image(MOUSE, button, frc);
 		}
 	}
 	return (0);
@@ -112,8 +96,8 @@ int			fr_mouse_move(int x, int y, t_fractol *frc)
 				frc->ctrl->prev_x = x;
 			if (frc->ctrl->prev_y == 0)
 				frc->ctrl->prev_y = y;
-			frc->offset_x += x - frc->ctrl->prev_x;
-			frc->offset_y += y - frc->ctrl->prev_y;
+			frc->offset_x += frc->ctrl->prev_x - x;
+			frc->offset_y += frc->ctrl->prev_y - y;
 			frc->ctrl->prev_x = x;
 			frc->ctrl->prev_y = y;
 		}

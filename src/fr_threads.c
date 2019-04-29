@@ -6,7 +6,7 @@
 /*   By: fsmith <fsmith@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/28 16:17:18 by fsmith            #+#    #+#             */
-/*   Updated: 2019/04/28 20:50:09 by fsmith           ###   ########.fr       */
+/*   Updated: 2019/04/29 20:59:13 by fsmith           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,8 +74,10 @@ void*		fr_thread_mandelbrot(void* thread_data)
 			i = 0;
 			n_r = 0;
 			n_i = 0;
-			c_r = (double)(x - WINDOW_W / 2 + data->frc->offset_x) / data->frc->scale;
-			c_i = (double)(y - WINDOW_H / 2 + data->frc->offset_y) / data->frc->scale;
+			c_r = (double)(x - WINDOW_W / 2 + data->frc->offset_x)
+					/ data->frc->scale;
+			c_i = (double)(y - WINDOW_H / 2 + data->frc->offset_y)
+					/ data->frc->scale;
 			temp_x = x;
 			temp_y = y;
 //			while (i < MAX_ITERATIONS && temp_x >= -WINDOW_W && temp_y >= -WINDOW_H

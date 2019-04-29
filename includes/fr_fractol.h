@@ -6,7 +6,7 @@
 /*   By: fsmith <fsmith@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/14 14:57:26 by fsmith            #+#    #+#             */
-/*   Updated: 2019/04/28 20:29:24 by fsmith           ###   ########.fr       */
+/*   Updated: 2019/04/29 20:15:52 by fsmith           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,8 @@
 # define WINDOW_H			900
 # define WINDOW_W			1200
 # define START_SCALE		200
-# define MAX_ITERATIONS		255
+# define MAX_ITERATIONS		100
 # define THREADS			16
-# define STEP_X				10000
-# define STEP_Y				1000
 
 # define MANDELBROT			1
 # define JULIA				2
@@ -102,12 +100,6 @@ typedef struct		s_fractol
 {
 	u_int8_t		type;
 	int 			clean_window;
-//	int				color_shift;
-//	int				color_height;
-
-//	int 			number_x;
-//	int 			number_y;
-
 	int 			offset_x;
 	int 			offset_y;
 	double			coeff_x;
@@ -115,8 +107,6 @@ typedef struct		s_fractol
 	double			scale;
 	t_service		*svc;
 	t_control		*ctrl;
-//	t_curr			*current;
-//	t_control		*control;
 }					t_fractol;
 
 typedef struct		s_tdata

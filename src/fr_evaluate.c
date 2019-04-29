@@ -111,10 +111,10 @@ void		fr_julia(t_fractol *frc)
 void		fr_scale_image(int mode, int keycode, t_fractol *frc)
 {
 	if ((mode == KEYBOARD && keycode == KEY_PLUS)
-		|| (mode == MOUSE && keycode == MOUSE_SCROLL_UP))
+	|| (mode == MOUSE && keycode == MOUSE_SCROLL_UP))
 		frc->scale *= 1.2;
 	else if ((mode == KEYBOARD && keycode == KEY_MINUS)
-			 || (mode == MOUSE && keycode == MOUSE_SCROLL_DOWN))
+	|| (mode == MOUSE && keycode == MOUSE_SCROLL_DOWN))
 		frc->scale /= 1.2;
 	fr_plot_image(frc);
 }
