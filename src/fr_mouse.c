@@ -6,7 +6,7 @@
 /*   By: fsmith <fsmith@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/14 16:18:53 by fsmith            #+#    #+#             */
-/*   Updated: 2019/04/29 21:08:00 by fsmith           ###   ########.fr       */
+/*   Updated: 2019/05/08 19:46:30 by fsmith           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,6 @@ int			fr_mouse_press(int button, int x, int y, t_fractol *frc)
 			{
 				frc->offset_x += (int)((x - WINDOW_W / 2) / frc->scale);
 				frc->offset_y += (int)((y - WINDOW_W / 2) / frc->scale);
-//				frc->offset_x += 10;
-//				frc->offset_y += 10;
 			}
 			else
 			{

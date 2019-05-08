@@ -6,7 +6,7 @@
 /*   By: fsmith <fsmith@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/14 16:12:52 by fsmith            #+#    #+#             */
-/*   Updated: 2019/04/21 17:49:14 by fsmith           ###   ########.fr       */
+/*   Updated: 2019/05/08 19:11:31 by fsmith           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,10 +67,10 @@ int			fr_keyboard_press(int keycode, t_fractol *frc)
 //		if (keycode == KEY_NUM_LEFT || keycode == KEY_NUM_RIGHT ||
 //			keycode == KEY_NUM_DOWN || keycode == KEY_NUM_UP)
 //			fdf_move(KEYBOARD, keycode, frc);
-//		if (keycode == KEY_PLUS || keycode == KEY_MINUS)
-//			fdf_scale_image(KEYBOARD, keycode, fdf);
-//		if (keycode == KEY_SPACE)
-//			fdf_move_to_center(fdf);
+		if (keycode == KEY_PLUS || keycode == KEY_MINUS)
+			fr_scale_image(KEYBOARD, keycode, frc);
+		if (keycode == KEY_SPACE)
+			fr_move_to_center(frc);
 //		if (keycode == KEY_NUM_1 || keycode == KEY_NUM_2 ||
 //			keycode == KEY_NUM_3 || keycode == KEY_NUM_4
 //			|| keycode == KEY_NUM_6 || keycode == KEY_NUM_7 ||

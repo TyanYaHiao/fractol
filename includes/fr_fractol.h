@@ -6,7 +6,7 @@
 /*   By: fsmith <fsmith@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/14 14:57:26 by fsmith            #+#    #+#             */
-/*   Updated: 2019/04/29 20:15:52 by fsmith           ###   ########.fr       */
+/*   Updated: 2019/05/08 21:53:51 by fsmith           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,10 @@
 
 # define DEFAULT_COLOR		0xFF6b6b
 # define TEXT_COLOR			0x00cdcd
-# define WINDOW_H			900
-# define WINDOW_W			1200
-# define START_SCALE		200
-# define MAX_ITERATIONS		100
+# define WINDOW_H			500
+# define WINDOW_W			700
+# define START_SCALE		300
+# define MAX_ITERATIONS		0xFF
 # define THREADS			16
 
 # define MANDELBROT			1
@@ -119,16 +119,12 @@ typedef struct		s_tdata
 int 		fr_read(int argc, char **argv, t_fractol *fractol);
 int 		fr_analyse_fractal(char *fractal, t_fractol *fractol);
 void 		fr_init_fractol(t_fractol *fractol);
-void		fr_set_pixel(t_fractol frc, int i);
-void		fr_set_pixel2(t_fractol frc, int x, int y, int color);
+void		fr_set_pixel(t_fractol frc, int x, int y, int color);
 void		fr_plot_image(t_fractol *fractol);
 void		fr_evaluate(t_fractol *frc);
 void*		fr_thread_julia(void* thread_data);
 void*		fr_thread_mandelbrot(void* thread_data);
 void		fr_scale_image(int mode, int keycode, t_fractol *frc);
-void		fr_julia(t_fractol *frc);
-void		fr_mandelbrot(t_fractol *frc);
-void		fr_explanation(t_fractol *frc);
 int			fr_keyboard_press(int keycode, t_fractol *frc);
 int			fr_keyboard_key_check(int keycode);
 int			fr_keyboard_release(int keycode, t_fractol *frc);
@@ -138,6 +134,7 @@ int			fr_mouse_move(int x, int y, t_fractol *frc);
 void		fr_info(t_fractol *frc);
 int			fr_close(void *param);
 int 		fr_color(t_fractol *fractol, int n);
+void		fr_move_to_center(t_fractol *frc);
 
 
 #endif
