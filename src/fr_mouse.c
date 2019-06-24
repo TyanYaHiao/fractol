@@ -6,7 +6,7 @@
 /*   By: fsmith <fsmith@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/14 16:18:53 by fsmith            #+#    #+#             */
-/*   Updated: 2019/05/08 19:46:30 by fsmith           ###   ########.fr       */
+/*   Updated: 2019/05/31 20:37:48 by fsmith           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int			fr_mouse_press(int button, int x, int y, t_fractol *frc)
 		if (button == MOUSE_LEFT_BUTTON)
 		{
 			mlx_clear_window((*frc).svc->mlx_ptr, (*frc).svc->win_ptr);
-			fr_evaluate(frc);
+//			fr_evaluate(frc);
 			fr_plot_image(frc);
 		}
 		if (button == MOUSE_RIGHT_BUTTON)
@@ -44,13 +44,13 @@ int			fr_mouse_press(int button, int x, int y, t_fractol *frc)
 		{
 			if (button == MOUSE_SCROLL_UP)
 			{
-				frc->offset_x += (int)((x - WINDOW_W / 2) / frc->scale);
-				frc->offset_y += (int)((y - WINDOW_W / 2) / frc->scale);
+				frc->offset_x += (int)((x - WINDOW_W / 2) / 1.2);
+				frc->offset_y += (int)((y - WINDOW_W / 2) / 1.2);
 			}
 			else
 			{
-				frc->offset_x -= (int)((x - WINDOW_W / 2) / frc->scale);
-				frc->offset_y -= (int)((y - WINDOW_W / 2) / frc->scale);
+				frc->offset_x -= (int)((x - WINDOW_W / 2) / 10);
+				frc->offset_y -= (int)((y - WINDOW_W / 2) / 10);
 			}
 				fr_scale_image(MOUSE, button, frc);
 		}
@@ -73,6 +73,8 @@ int			fr_mouse_release(int button, int x, int y, t_fractol *frc)
 
 int			fr_mouse_move(int x, int y, t_fractol *frc)
 {
+	frc->ctrl->x = x;
+	frc->ctrl->y = y;
 	if (frc->type == EXPLANATION)
 	{
 		if (frc->ctrl->mouse_left_button == TRUE)

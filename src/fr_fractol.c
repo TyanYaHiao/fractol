@@ -6,7 +6,7 @@
 /*   By: fsmith <fsmith@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/14 15:46:40 by fsmith            #+#    #+#             */
-/*   Updated: 2019/05/08 18:29:41 by fsmith           ###   ########.fr       */
+/*   Updated: 2019/05/31 21:16:52 by fsmith           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,10 @@ void 	fr_init_fractol(t_fractol *fractol)
 	fractol->scale = START_SCALE;
 //	fractol->pts = (t_points*)malloc(sizeof(t_points) * STEP_X * STEP_Y);
 	fractol->svc = (t_service*)malloc(sizeof(t_service));
+//	fractol->buff = (t_buff*)malloc(sizeof(t_buff));
 	fractol->svc->mlx_ptr = mlx_init();
 	fractol->svc->win_ptr = mlx_new_window(fractol->svc->mlx_ptr,
-		WINDOW_W, WINDOW_H, "Fract'ol");
+		WINDOW_W, WINDOW_H, fr_convert_name(fractol->type));
 	fractol->svc->img_ptr = mlx_new_image(fractol->svc->mlx_ptr, WINDOW_W,
 		WINDOW_H);
 	fractol->svc->image = mlx_get_data_addr(fractol->svc->img_ptr,

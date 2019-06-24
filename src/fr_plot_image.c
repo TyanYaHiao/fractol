@@ -6,7 +6,7 @@
 /*   By: fsmith <fsmith@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/14 15:52:39 by fsmith            #+#    #+#             */
-/*   Updated: 2019/05/08 19:48:28 by fsmith           ###   ########.fr       */
+/*   Updated: 2019/05/31 20:37:48 by fsmith           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ void		fr_plot_image(t_fractol *frc)
 	int		i;
 
 	i = 0;
-
 	mlx_clear_window(frc->svc->mlx_ptr, frc->svc->win_ptr);
 	if (frc->clean_window)
 	{
