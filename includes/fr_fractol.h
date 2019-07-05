@@ -6,7 +6,7 @@
 /*   By: fsmith <fsmith@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/14 14:57:26 by fsmith            #+#    #+#             */
-/*   Updated: 2019/06/24 21:20:58 by fsmith           ###   ########.fr       */
+/*   Updated: 2019/07/05 21:07:46 by fsmith           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,8 @@
 # define START_SCALE		200
 # define MAX_ITERATIONS		0xFF
 # define THREADS			16
-# define STEP_X				200
-# define STEP_Y				200
+# define STEP_X				100
+# define STEP_Y				100
 
 # define MANDELBROT			1
 # define JULIA				2
@@ -147,7 +147,7 @@ void		fr_plot_image(t_fractol *fractol);
 void		fr_evaluate(t_fractol *frc);
 void*		fr_thread_julia(void* thread_data);
 void*		fr_thread_mandelbrot(void* thread_data);
-void		fr_scale_image(int mode, int keycode, t_fractol *frc);
+void		fr_scale_image(int mode, int keycode, t_fractol *frc, int x, int y);
 int			fr_keyboard_press(int keycode, t_fractol *frc);
 int 		fr_move(int keycode, t_fractol *frc);
 int			fr_keyboard_key_check(int keycode);
@@ -159,6 +159,7 @@ void		fr_info(t_fractol *frc);
 int			fr_close(void *param);
 int 		fr_color(t_fractol *fractol, int n);
 void		fr_move_to_center(t_fractol *frc);
+int			fr_color_calc_mandelbrot(double n_r, double n_i, double c_r, double c_i);
 
 
 #endif

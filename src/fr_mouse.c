@@ -6,7 +6,7 @@
 /*   By: fsmith <fsmith@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/14 16:18:53 by fsmith            #+#    #+#             */
-/*   Updated: 2019/05/31 20:37:48 by fsmith           ###   ########.fr       */
+/*   Updated: 2019/07/05 21:02:17 by fsmith           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,17 +42,7 @@ int			fr_mouse_press(int button, int x, int y, t_fractol *frc)
 	{
 		if (button == MOUSE_SCROLL_UP || button == MOUSE_SCROLL_DOWN)
 		{
-			if (button == MOUSE_SCROLL_UP)
-			{
-				frc->offset_x += (int)((x - WINDOW_W / 2) / 1.2);
-				frc->offset_y += (int)((y - WINDOW_W / 2) / 1.2);
-			}
-			else
-			{
-				frc->offset_x -= (int)((x - WINDOW_W / 2) / 10);
-				frc->offset_y -= (int)((y - WINDOW_W / 2) / 10);
-			}
-				fr_scale_image(MOUSE, button, frc);
+			fr_scale_image(MOUSE, button, frc, x, y);
 		}
 	}
 	return (0);

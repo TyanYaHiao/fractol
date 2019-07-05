@@ -6,7 +6,7 @@
 /*   By: fsmith <fsmith@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/14 14:57:33 by fsmith            #+#    #+#             */
-/*   Updated: 2019/04/14 19:25:00 by fsmith           ###   ########.fr       */
+/*   Updated: 2019/07/05 19:56:30 by fsmith           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,21 @@ int				main(int argc, char **argv)
 {
 	t_fractol	fractol;
 
+	/*
+	**	Чтение название фрактала, инициализация пустого фрактала
+	**	если фрактал не подходит под заложенные - выход
+	*/
 	if (!(fr_read(argc, argv, &fractol)))
 		return (0);
+
+	/*
+	**	Отрисовка фрактала
+	**	первичный просчет фигуры
+	**	вывод сервисной информации
+	*/
 	fr_plot_image(&fractol);
+
+
 	mlx_hook(fractol.svc->win_ptr, 4, 0, fr_mouse_press, &fractol);
 	mlx_hook(fractol.svc->win_ptr, 5, 0, fr_mouse_release, &fractol);
 	mlx_hook(fractol.svc->win_ptr, 6, 0, fr_mouse_move, &fractol);

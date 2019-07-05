@@ -6,7 +6,7 @@
 /*   By: fsmith <fsmith@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/14 15:52:39 by fsmith            #+#    #+#             */
-/*   Updated: 2019/05/31 20:37:48 by fsmith           ###   ########.fr       */
+/*   Updated: 2019/07/05 20:04:29 by fsmith           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,12 +34,22 @@ void		fr_plot_image(t_fractol *frc)
 		frc->svc->image = mlx_get_data_addr(frc->svc->img_ptr,
 			&frc->svc->bpp,	&frc->svc->s_line, &frc->svc->endian);
 	}
+
+	/*
+	**	Все расчеты фрактала
+	**	оптимизация вычислений
+	*/
 	fr_evaluate(frc);
+
 	mlx_put_image_to_window(frc->svc->mlx_ptr, frc->svc->win_ptr,
 		frc->svc->img_ptr, 0, 0);
 	if (frc->clean_window)
 	{
 		mlx_destroy_image(frc->svc->mlx_ptr, frc->svc->img_ptr);
 	}
+
+	/*
+	**  Вывод сервисной инфы
+	*/
 	fr_info(frc);
 }
