@@ -51,16 +51,16 @@ void		fr_info(t_fractol *frc)
 	mlx_string_put(frc->svc->mlx_ptr, frc->svc->win_ptr, WINDOW_W - 70, 140,
 		TEXT_COLOR, ft_itoa(frc->ctrl->x));
 	mlx_string_put(frc->svc->mlx_ptr, frc->svc->win_ptr,
-				   WINDOW_W - 160, 160, TEXT_COLOR, "    y:");
+		WINDOW_W - 160, 160, TEXT_COLOR, "    y:");
 	mlx_string_put(frc->svc->mlx_ptr, frc->svc->win_ptr, WINDOW_W - 70, 160,
-				   TEXT_COLOR, ft_itoa(frc->ctrl->y));
+		TEXT_COLOR, ft_itoa(frc->ctrl->y));
 
 	mlx_string_put(frc->svc->mlx_ptr, frc->svc->win_ptr,
-				   WINDOW_W - 160, 180, TEXT_COLOR, "offset x:");
+		WINDOW_W - 160, 180, TEXT_COLOR, "offset x:");
 	mlx_string_put(frc->svc->mlx_ptr, frc->svc->win_ptr, WINDOW_W - 70, 180,
-				   TEXT_COLOR, ft_itoa(frc->offset_x));
+		TEXT_COLOR, ft_itoa(frc->offset_x));
 	mlx_string_put(frc->svc->mlx_ptr, frc->svc->win_ptr,
-				   WINDOW_W - 160, 200, TEXT_COLOR, "offset y:");
+		WINDOW_W - 160, 200, TEXT_COLOR, "offset y:");
 	mlx_string_put(frc->svc->mlx_ptr, frc->svc->win_ptr, WINDOW_W - 70, 200,
-				   TEXT_COLOR, ft_itoa(frc->offset_y));
+		TEXT_COLOR, ft_itoa(frc->offset_y));
 }

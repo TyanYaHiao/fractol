@@ -6,7 +6,7 @@
 /*   By: fsmith <fsmith@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/14 16:37:14 by fsmith            #+#    #+#             */
-/*   Updated: 2019/07/05 22:02:09 by fsmith           ###   ########.fr       */
+/*   Updated: 2019/07/07 18:42:59 by fsmith           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,43 +50,25 @@ void		fr_evaluate(t_fractol *frc)
 
 void		fr_scale_image(int mode, int keycode, t_fractol *frc, int x, int y)
 {
-	if (keycode == KEY_PLUS || keycode == MOUSE_SCROLL_UP)
+	if (keycode == MOUSE_SCROLL_UP || keycode == KEY_PLUS)
+	{
 		frc->scale *= 1.2;
-	else if (keycode == KEY_MINUS || keycode == MOUSE_SCROLL_DOWN)
-		frc->scale /= 1.2;
-	if (mode == MOUSE)
-	{
-		if (keycode == MOUSE_SCROLL_UP)
-		{
-			frc->offset_x += (int)(x / 1.2);
-			frc->offset_y += (int)(y / 1.2);
-		}
-		else if (keycode == MOUSE_SCROLL_DOWN)
-		{
-			frc->offset_x -= (int)(x / 10);
-			frc->offset_y -= (int)(y / 10);
-		}
+		frc->offset_x = (int)(frc->offset_x * 1.2 + x * 0.2);
+		frc->offset_y = (int)(frc->offset_y * 1.2 + y * 0.2);
 	}
-	else if (mode == KEYBOARD)
+	else if (keycode == MOUSE_SCROLL_DOWN || keycode == KEY_MINUS)
 	{
-		//	Сделать приближение к центру экрана
-		if (keycode == KEY_PLUS)
-		{
-			frc->offset_x += (WINDOW_W / 2) / frc->scale;
-			frc->offset_y += (WINDOW_H / 2) / frc->scale;
-		}
-		else if (keycode == KEY_MINUS)
-		{
-			frc->offset_x -= (WINDOW_W / 2) / frc->scale;
-			frc->offset_y -= (WINDOW_H / 2) / frc->scale;
-		}
+		frc->scale /= 1.2;
+		frc->offset_x = (int)(frc->offset_x / 1.2 - x * 0.2);
+		frc->offset_y = (int)(frc->offset_y / 1.2 - y * 0.2);
 	}
 	fr_plot_image(frc);
 }
 
 void		fr_move_to_center(t_fractol *frc)
 {
-	frc->offset_x = 0;
-	frc->offset_y = 0;
+	frc->offset_x = -WINDOW_W / 2;
+	frc->offset_y = -WINDOW_H / 2;
+	frc->scale = START_SCALE;
 	fr_plot_image(frc);
 }

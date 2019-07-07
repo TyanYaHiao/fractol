@@ -68,7 +68,7 @@ int			fr_keyboard_press(int keycode, t_fractol *frc)
 			keycode == KEY_NUM_DOWN || keycode == KEY_NUM_UP)
 			fr_move(keycode, frc);
 		if (keycode == KEY_PLUS || keycode == KEY_MINUS)
-			fr_scale_image(KEYBOARD, keycode, frc, 0, 0);
+			fr_scale_image(KEYBOARD, keycode, frc, WINDOW_W / 2, WINDOW_H / 2);
 		if (keycode == KEY_SPACE)
 			fr_move_to_center(frc);
 //		if (keycode == KEY_NUM_1 || keycode == KEY_NUM_2 ||
