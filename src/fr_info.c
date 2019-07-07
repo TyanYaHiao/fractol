@@ -6,7 +6,7 @@
 /*   By: fsmith <fsmith@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/21 17:57:26 by fsmith            #+#    #+#             */
-/*   Updated: 2019/07/05 19:44:36 by fsmith           ###   ########.fr       */
+/*   Updated: 2019/07/07 19:25:29 by fsmith           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void		fr_info(t_fractol *frc)
 //		WINDOW_W - 160, 80, TEXT_COLOR, "Addition");
 	mlx_string_put(frc->svc->mlx_ptr, frc->svc->win_ptr,
 		WINDOW_W - 160, 100, TEXT_COLOR, "Scale:");
-	mlx_string_put(frc->svc->mlx_ptr, frc->svc->win_ptr, WINDOW_W - 70, 100,
+	mlx_string_put(frc->svc->mlx_ptr, frc->svc->win_ptr, WINDOW_W - 100, 100,
 		TEXT_COLOR, ft_strcat(ft_dtoa(frc->scale / START_SCALE * 100, 0), "%"));
 //	mlx_string_put(frc->svc->mlx_ptr, frc->svc->win_ptr,
 //		WINDOW_W - 160, 120, TEXT_COLOR, "Imagin':");

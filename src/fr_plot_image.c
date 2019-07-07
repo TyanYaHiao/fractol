@@ -28,12 +28,9 @@ void		fr_plot_image(t_fractol *frc)
 
 	i = 0;
 	mlx_clear_window(frc->svc->mlx_ptr, frc->svc->win_ptr);
-	if (frc->clean_window)
-	{
-		frc->svc->img_ptr = mlx_new_image(frc->svc->mlx_ptr, WINDOW_W, WINDOW_H);
-		frc->svc->image = mlx_get_data_addr(frc->svc->img_ptr,
-			&frc->svc->bpp,	&frc->svc->s_line, &frc->svc->endian);
-	}
+	frc->svc->img_ptr = mlx_new_image(frc->svc->mlx_ptr, WINDOW_W, WINDOW_H);
+	frc->svc->image = mlx_get_data_addr(frc->svc->img_ptr,
+		&frc->svc->bpp,	&frc->svc->s_line, &frc->svc->endian);
 
 	/*
 	**	Все расчеты фрактала
@@ -43,10 +40,7 @@ void		fr_plot_image(t_fractol *frc)
 
 	mlx_put_image_to_window(frc->svc->mlx_ptr, frc->svc->win_ptr,
 		frc->svc->img_ptr, 0, 0);
-	if (frc->clean_window)
-	{
-		mlx_destroy_image(frc->svc->mlx_ptr, frc->svc->img_ptr);
-	}
+	mlx_destroy_image(frc->svc->mlx_ptr, frc->svc->img_ptr);
 
 	/*
 	**  Вывод сервисной инфы

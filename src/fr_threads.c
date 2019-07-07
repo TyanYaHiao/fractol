@@ -6,7 +6,7 @@
 /*   By: fsmith <fsmith@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/28 16:17:18 by fsmith            #+#    #+#             */
-/*   Updated: 2019/07/05 21:26:34 by fsmith           ###   ########.fr       */
+/*   Updated: 2019/07/07 19:28:38 by fsmith           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ void*		fr_thread_julia(void* thread_data)
 //		}
 //		x++;
 //	}
-//	return NULL;
+	return NULL;
 }
 
 void*		fr_thread_mandelbrot(void* thread_data)

@@ -55,13 +55,6 @@ int			fr_keyboard_press(int keycode, t_fractol *frc)
 	{
 		if (keycode == KEY_ESC)
 			exit(0);
-		if (keycode == KEY_Q)
-		{
-			frc->svc->img_ptr = mlx_new_image(frc->svc->mlx_ptr, WINDOW_W, WINDOW_H);
-			frc->svc->image = mlx_get_data_addr(frc->svc->img_ptr,
-				&frc->svc->bpp,	&frc->svc->s_line, &frc->svc->endian);
-			frc->clean_window = !frc->clean_window;
-		}
 //		mlx_clear_window((*frc).svc->mlx_ptr, (*frc).svc->win_ptr);
 //		fr_keyboard_key_letter(keycode, frc);
 		if (keycode == KEY_NUM_LEFT || keycode == KEY_NUM_RIGHT ||

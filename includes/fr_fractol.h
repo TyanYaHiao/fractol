@@ -6,7 +6,7 @@
 /*   By: fsmith <fsmith@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/14 14:57:26 by fsmith            #+#    #+#             */
-/*   Updated: 2019/07/05 21:07:46 by fsmith           ###   ########.fr       */
+/*   Updated: 2019/07/07 21:14:14 by fsmith           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,9 @@
 # define KEY_NUM_LEFT		123
 # define KEY_NUM_RIGHT		124
 
+/*
+**	Структура для управления
+*/
 typedef struct		s_control
 {
 	int 			mouse_left_button;
@@ -88,6 +91,9 @@ typedef struct		s_control
 	int 			y;
 }					t_control;
 
+/*
+**	Структура с сервисной информацией
+*/
 typedef struct		s_service
 {
 	void			*mlx_ptr;
@@ -100,43 +106,29 @@ typedef struct		s_service
 	int				s_line;
 }					t_service;
 
-//typedef struct		s_buff
-//{
-//	int 			i;
-//	int 			x;
-//	int 			y;
-//	int 			temp_x;
-//	int 			temp_y;
-//	int 			color;
-//	double 			n_r;
-//	double 			n_i;
-//	double 			c_r;
-//	double 			c_i;
-//	double 			temp_r;
-//	double 			temp_i;
-//}					t_buff;
-
+/*
+**	Основная структура со всей информацией
+**	по фракталу
+*/
 typedef struct		s_fractol
 {
 	u_int8_t		type;
-	int 			clean_window;
 	int 			offset_x;
 	int 			offset_y;
-	double			coeff_x;
-	double			coeff_y;
 	double			scale;
 	t_service		*svc;
 	t_control		*ctrl;
-//	t_buff			*buff;
 }					t_fractol;
 
+/*
+**	Структура для параллельных вычислений
+*/
 typedef struct		s_tdata
 {
 	int 			start_x;
 	int 			end_x;
 	t_fractol		*frc;
 }					t_tdata;
-
 
 int 		fr_read(int argc, char **argv, t_fractol *fractol);
 int 		fr_analyse_fractal(char *fractal, t_fractol *fractol);

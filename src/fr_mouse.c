@@ -6,7 +6,7 @@
 /*   By: fsmith <fsmith@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/14 16:18:53 by fsmith            #+#    #+#             */
-/*   Updated: 2019/07/05 21:02:17 by fsmith           ###   ########.fr       */
+/*   Updated: 2019/07/07 21:15:08 by fsmith           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,13 +23,10 @@ int			fr_mouse_press(int button, int x, int y, t_fractol *frc)
 		if (button == MOUSE_LEFT_BUTTON)
 		{
 			mlx_clear_window((*frc).svc->mlx_ptr, (*frc).svc->win_ptr);
-//			fr_evaluate(frc);
 			fr_plot_image(frc);
 		}
 		if (button == MOUSE_RIGHT_BUTTON)
 		{
-			frc->coeff_x = x;
-			frc->coeff_y = y;
 			mlx_clear_window((*frc).svc->mlx_ptr, (*frc).svc->win_ptr);
 			mlx_destroy_image(frc->svc->mlx_ptr, frc->svc->img_ptr);
 			frc->svc->img_ptr = mlx_new_image(frc->svc->mlx_ptr, WINDOW_W, WINDOW_H);
@@ -74,8 +71,6 @@ int			fr_mouse_move(int x, int y, t_fractol *frc)
 	}
 	else if (frc->type == JULIA)
 	{
-		frc->coeff_x = x;
-		frc->coeff_y = y;
 		fr_plot_image(frc);
 	}
 	else if (frc->type == MANDELBROT)
