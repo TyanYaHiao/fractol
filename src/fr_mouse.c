@@ -6,7 +6,7 @@
 /*   By: fsmith <fsmith@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/14 16:18:53 by fsmith            #+#    #+#             */
-/*   Updated: 2019/07/07 21:15:08 by fsmith           ###   ########.fr       */
+/*   Updated: 2019/07/08 21:32:40 by fsmith           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,15 +62,10 @@ int			fr_mouse_move(int x, int y, t_fractol *frc)
 {
 	frc->ctrl->x = x;
 	frc->ctrl->y = y;
-	if (frc->type == EXPLANATION)
+	if (frc->type == JULIA)
 	{
-		if (frc->ctrl->mouse_left_button == TRUE)
-		{
-			fr_plot_image(frc);
-		}
-	}
-	else if (frc->type == JULIA)
-	{
+		frc->ctrl->c_r = (frc->ctrl->x + frc->offset_x) / frc->scale;
+		frc->ctrl->c_i = (frc->ctrl->y + frc->offset_y) / frc->scale;
 		fr_plot_image(frc);
 	}
 	else if (frc->type == MANDELBROT)

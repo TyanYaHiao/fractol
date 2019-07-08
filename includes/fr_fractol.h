@@ -6,7 +6,7 @@
 /*   By: fsmith <fsmith@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/14 14:57:26 by fsmith            #+#    #+#             */
-/*   Updated: 2019/07/07 21:14:14 by fsmith           ###   ########.fr       */
+/*   Updated: 2019/07/08 21:28:50 by fsmith           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,8 @@ typedef struct		s_control
 	int 			prev_y;
 	int 			x;
 	int 			y;
+	double			c_r;
+	double			c_i;
 }					t_control;
 
 /*

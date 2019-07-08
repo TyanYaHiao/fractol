@@ -6,7 +6,7 @@
 /*   By: fsmith <fsmith@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/14 16:12:52 by fsmith            #+#    #+#             */
-/*   Updated: 2019/07/05 19:44:36 by fsmith           ###   ########.fr       */
+/*   Updated: 2019/07/08 19:28:16 by fsmith           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,7 @@ int 		fr_move(int keycode, t_fractol *frc)
 	else if (keycode == KEY_NUM_DOWN)
 		frc->offset_y -= STEP_Y;
 	fr_plot_image(frc);
+	return (0);
 }
 
 int			fr_keyboard_release(int keycode, t_fractol *frc)
