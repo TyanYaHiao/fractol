@@ -6,7 +6,7 @@
 /*   By: fsmith <fsmith@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/14 15:31:05 by fsmith            #+#    #+#             */
-/*   Updated: 2019/07/08 19:23:57 by fsmith           ###   ########.fr       */
+/*   Updated: 2019/07/10 20:09:18 by fsmith           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ int 	fr_read(int argc, char **argv, t_fractol *fractol)
 		ft_putendl("          Julia");
 		ft_putendl("          Turtle");
 		ft_putendl("          Island");
+		ft_putendl("          Burning_Ship");
 		return (0);
 	}
 	fr_init_fractol(fractol);
@@ -40,6 +41,8 @@ int 	fr_analyse_fractal(char *fractal, t_fractol *fractol)
 		fractol->type = ISLAND;
 	else if (!(ft_strcmp(fractal, "Explanation")))
 		fractol->type = EXPLANATION;
+	else if (!(ft_strcmp(fractal, "Burning_Ship")))
+		fractol->type = BURNING_SHIP;
 	else
 		return (0);
 	return (1);
@@ -57,5 +60,7 @@ char	*fr_convert_name(int type)
 		return ("Island");
 	if (type == EXPLANATION)
 		return ("Explanation");
+	if (type == BURNING_SHIP)
+		return ("Burning Ship");
 	return ("Fract'ol");
 }

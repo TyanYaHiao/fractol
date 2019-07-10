@@ -6,7 +6,7 @@
 /*   By: fsmith <fsmith@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/14 16:12:52 by fsmith            #+#    #+#             */
-/*   Updated: 2019/07/08 19:28:16 by fsmith           ###   ########.fr       */
+/*   Updated: 2019/07/10 20:09:18 by fsmith           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,8 @@ int			fr_keyboard_press(int keycode, t_fractol *frc)
 			fr_scale_image(KEYBOARD, keycode, frc, WINDOW_W / 2, WINDOW_H / 2);
 		if (keycode == KEY_SPACE)
 			fr_move_to_center(frc);
+		if (keycode == KEY_Q)
+			fr_change_color(frc);
 //		if (keycode == KEY_NUM_1 || keycode == KEY_NUM_2 ||
 //			keycode == KEY_NUM_3 || keycode == KEY_NUM_4
 //			|| keycode == KEY_NUM_6 || keycode == KEY_NUM_7 ||

@@ -6,7 +6,7 @@
 /*   By: fsmith <fsmith@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/14 14:57:26 by fsmith            #+#    #+#             */
-/*   Updated: 2019/07/08 21:28:50 by fsmith           ###   ########.fr       */
+/*   Updated: 2019/07/10 21:19:37 by fsmith           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@
 # include <math.h>
 # include <stdio.h>
 # include <pthread.h>
+
+# define BYTES_SIZE			10
 
 # define DEFAULT_COLOR		0xFF6b6b
 # define TEXT_COLOR			0x00cdcd
@@ -35,7 +37,8 @@
 # define JULIA				2
 # define TURTLE				3
 # define ISLAND				4
-# define EXPLANATION		5
+# define BURNING_SHIP		5
+# define EXPLANATION		6
 
 # define KEYBOARD			1
 # define MOUSE				2
@@ -89,6 +92,8 @@ typedef struct		s_control
 	int 			prev_y;
 	int 			x;
 	int 			y;
+	double			n_r;
+	double			n_i;
 	double			c_r;
 	double			c_i;
 }					t_control;
@@ -108,6 +113,14 @@ typedef struct		s_service
 	int				s_line;
 }					t_service;
 
+typedef struct		s_color
+{
+	int 			stable;
+	int 			unstable;
+	int 			shift;
+	int 			*direct;
+}					t_color;
+
 /*
 **	Основная структура со всей информацией
 **	по фракталу
@@ -120,6 +133,7 @@ typedef struct		s_fractol
 	double			scale;
 	t_service		*svc;
 	t_control		*ctrl;
+	t_color			*clr;
 }					t_fractol;
 
 /*
@@ -141,6 +155,7 @@ void		fr_plot_image(t_fractol *fractol);
 void		fr_evaluate(t_fractol *frc);
 void*		fr_thread_julia(void* thread_data);
 void*		fr_thread_mandelbrot(void* thread_data);
+void*		fr_thread_burning_ship(void* thread_data);
 void		fr_scale_image(int mode, int keycode, t_fractol *frc, int x, int y);
 int			fr_keyboard_press(int keycode, t_fractol *frc);
 int 		fr_move(int keycode, t_fractol *frc);
@@ -153,7 +168,9 @@ void		fr_info(t_fractol *frc);
 int			fr_close(void *param);
 int 		fr_color(t_fractol *fractol, int n);
 void		fr_move_to_center(t_fractol *frc);
-int			fr_color_calc_mandelbrot(double n_r, double n_i, double c_r, double c_i);
+int			fr_color_calc_mandelbrot(t_color color, double n_r, double n_i, double c_r, double c_i);
+int 		fr_change_color(t_fractol *frc);
+int			fr_random_number();
 
 
 #endif

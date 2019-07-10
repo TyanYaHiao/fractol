@@ -6,7 +6,7 @@
 /*   By: fsmith <fsmith@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/14 16:37:14 by fsmith            #+#    #+#             */
-/*   Updated: 2019/07/08 20:13:11 by fsmith           ###   ########.fr       */
+/*   Updated: 2019/07/10 20:32:22 by fsmith           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,9 @@ void		fr_evaluate(t_fractol *frc)
 		*/
 		else if (frc->type == MANDELBROT)
 			pthread_create(&(threads[i]), NULL, fr_thread_mandelbrot, &data[i]);
+		else if (frc->type == BURNING_SHIP)
+			pthread_create(&(threads[i]), NULL, fr_thread_burning_ship, &data[i]);
+
 		i++;
 	}
 	i = 0;
