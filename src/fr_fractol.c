@@ -6,7 +6,7 @@
 /*   By: fsmith <fsmith@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/14 15:46:40 by fsmith            #+#    #+#             */
-/*   Updated: 2019/07/10 21:19:37 by fsmith           ###   ########.fr       */
+/*   Updated: 2019/07/12 23:10:35 by fsmith           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,4 +37,6 @@ void 	fr_init_fractol(t_fractol *fractol)
 	fractol->clr->unstable = 0xFF;
 	fractol->clr->shift = 16;
 	fractol->clr->direct = (int*)malloc(sizeof(int) * MAX_ITERATIONS);
+	fractol->clr->counter = 0;
+	fr_solid_color(fractol);
 }

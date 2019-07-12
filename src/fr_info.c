@@ -15,16 +15,16 @@
 void		fr_info(t_fractol *frc)
 {
 	mlx_string_put(frc->svc->mlx_ptr, frc->svc->win_ptr,
-				   WINDOW_W - 180, 20, TEXT_COLOR, "Scale:");
+		WINDOW_W - 180, 20, TEXT_COLOR, "Scale:");
 	mlx_string_put(frc->svc->mlx_ptr, frc->svc->win_ptr, WINDOW_W - 110, 20,
-				   TEXT_COLOR, ft_strcat(ft_dtoa(frc->scale / START_SCALE * 100, 0), "%"));
+		TEXT_COLOR, ft_strcat(ft_dtoa(frc->scale / START_SCALE * 100, 0), "%"));
 	mlx_string_put(frc->svc->mlx_ptr, frc->svc->win_ptr,
-				   WINDOW_W - 180, 40, TEXT_COLOR, "    x:");
+		WINDOW_W - 180, 40, TEXT_COLOR, "    x:");
 	mlx_string_put(frc->svc->mlx_ptr, frc->svc->win_ptr, WINDOW_W - 110, 40,
-				   TEXT_COLOR, ft_itoa(frc->ctrl->x));
+		TEXT_COLOR, ft_itoa(frc->ctrl->x));
 	mlx_string_put(frc->svc->mlx_ptr, frc->svc->win_ptr,
-				   WINDOW_W - 180, 60, TEXT_COLOR, "    y:");
+		WINDOW_W - 180, 60, TEXT_COLOR, "    y:");
 	mlx_string_put(frc->svc->mlx_ptr, frc->svc->win_ptr, WINDOW_W - 110, 60,
-				   TEXT_COLOR, ft_itoa(frc->ctrl->y));
+		TEXT_COLOR, ft_itoa(frc->ctrl->y));
 }
 

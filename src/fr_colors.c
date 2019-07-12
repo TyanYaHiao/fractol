@@ -6,13 +6,13 @@
 /*   By: fsmith <fsmith@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/14 16:57:13 by fsmith            #+#    #+#             */
-/*   Updated: 2019/07/10 21:44:53 by fsmith           ###   ########.fr       */
+/*   Updated: 2019/07/12 23:17:52 by fsmith           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fr_fractol.h"
 
-int 		fr_change_color(t_fractol *frc)
+int 	fr_random_color(t_fractol *frc)
 {
 	mlx_clear_window((*frc).svc->mlx_ptr, (*frc).svc->win_ptr);
 	frc->clr->unstable = fr_random_number() & 0xFF;
@@ -60,4 +60,60 @@ int fr_random_number()
 		read(fd, random_bytes, BYTES_SIZE);
 	}
 	return ((int)random_bytes[bytes_pointer++]);
+}
+
+void	fr_solid_color(t_fractol *frc)
+{
+	int i;
+
+	mlx_clear_window((*frc).svc->mlx_ptr, (*frc).svc->win_ptr);
+	i = 0;
+	frc->clr->stable = 0x0;
+	frc->clr->counter++;
+	if (i % 3 == (0 + frc->clr->counter) % 3)
+		frc->clr->shift = 16;
+	else if (i % 3 == (1 + frc->clr->counter) % 3)
+		frc->clr->shift = 4;
+	else if (i % 3 == (2 + frc->clr->counter) % 3)
+		frc->clr->shift = 0;
+	frc->clr->unstable = 0xFF;
+	while (i < MAX_ITERATIONS)
+	{
+		frc->clr->direct[i] = (frc->clr->unstable / 16 * i) << frc->clr->shift;
+		i++;
+	}
+	fr_plot_image(frc);
+}
+
+void	fr_rainbow_color(t_fractol *frc)
+{
+	int i;
+
+	mlx_clear_window((*frc).svc->mlx_ptr, (*frc).svc->win_ptr);
+	i = 0;
+	frc->clr->stable = 0xFFFFFF;
+	frc->clr->counter++;
+//	if (frc->clr->counter > 6)
+//		frc->clr->counter = 0;
+//	frc->clr->shift = 0x10;
+//	frc->clr->unstable = 0xFF;
+	while (i < MAX_ITERATIONS)
+	{
+		if (i % 7 == (0 + frc->clr->counter) % 7)
+			frc->clr->direct[i] = RED;
+		else if (i % 7 == (1 + frc->clr->counter) % 7)
+			frc->clr->direct[i] = ORANGE;
+		else if (i % 7 == (2 + frc->clr->counter) % 7)
+			frc->clr->direct[i] = YELLOW;
+		else if (i % 7 == (3 + frc->clr->counter) % 7)
+			frc->clr->direct[i] = GREEN;
+		else if (i % 7 == (4 + frc->clr->counter) % 7)
+			frc->clr->direct[i] = TEAL;
+		else if (i % 7 == (5 + frc->clr->counter) % 7)
+			frc->clr->direct[i] = BLUE;
+		else if (i % 7 == (6 + frc->clr->counter) % 7)
+			frc->clr->direct[i] = PURPLE;
+		i++;
+	}
+	fr_plot_image(frc);
 }

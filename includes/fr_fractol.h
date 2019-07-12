@@ -6,7 +6,7 @@
 /*   By: fsmith <fsmith@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/14 14:57:26 by fsmith            #+#    #+#             */
-/*   Updated: 2019/07/10 21:19:37 by fsmith           ###   ########.fr       */
+/*   Updated: 2019/07/12 22:55:50 by fsmith           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,14 @@
 
 # define DEFAULT_COLOR		0xFF6b6b
 # define TEXT_COLOR			0x00cdcd
+# define RED				0xFF0000
+# define ORANGE				0xFF4500
+# define YELLOW				0xFFFF00
+# define GREEN				0x228B22
+# define TEAL				0x00FFFF
+# define BLUE				0x0000FF
+# define PURPLE				0x8A2BE2
+
 # define WINDOW_H			500
 # define WINDOW_W			700
 # define START_SCALE		200
@@ -119,6 +127,7 @@ typedef struct		s_color
 	int 			unstable;
 	int 			shift;
 	int 			*direct;
+	int				counter;
 }					t_color;
 
 /*
@@ -169,8 +178,9 @@ int			fr_close(void *param);
 int 		fr_color(t_fractol *fractol, int n);
 void		fr_move_to_center(t_fractol *frc);
 int			fr_color_calc_mandelbrot(t_color color, double n_r, double n_i, double c_r, double c_i);
-int 		fr_change_color(t_fractol *frc);
+int 		fr_random_color(t_fractol *frc);
+void		fr_rainbow_color(t_fractol *frc);
+void		fr_solid_color(t_fractol *frc);
 int			fr_random_number();
-
 
 #endif
