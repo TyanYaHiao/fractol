@@ -70,6 +70,8 @@ int			fr_keyboard_press(int keycode, t_fractol *frc)
 			fr_rainbow_color(frc);
 		if (keycode == KEY_E)
 			fr_solid_color(frc);
+		if (keycode == KEY_R)
+			fr_random_fractol(frc);
 //		if (keycode == KEY_NUM_1 || keycode == KEY_NUM_2 ||
 //			keycode == KEY_NUM_3 || keycode == KEY_NUM_4
 //			|| keycode == KEY_NUM_6 || keycode == KEY_NUM_7 ||

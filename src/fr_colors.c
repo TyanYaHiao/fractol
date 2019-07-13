@@ -6,7 +6,7 @@
 /*   By: fsmith <fsmith@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/14 16:57:13 by fsmith            #+#    #+#             */
-/*   Updated: 2019/07/13 18:14:30 by fsmith           ###   ########.fr       */
+/*   Updated: 2019/07/13 20:13:10 by fsmith           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,10 @@ int 	fr_random_color(t_fractol *frc)
 	int i = 0;
 	while (i < MAX_ITERATIONS)
 	{
-		frc->clr->unstable[i] = fr_random_number() & 0xFF +
-							((fr_random_number() & 0xFF) << 0x8) +
-							((fr_random_number() & 0xFF) << 0x16);
+//		frc->clr->unstable[i] = fr_random_number() & 0xFF +
+//							((fr_random_number() & 0xFF) << 0x8) +
+//							((fr_random_number() & 0xFF) << 0x16);
+		frc->clr->unstable[i] = (rand() & 0xFFFFFF);
 		i++;
 	}
 	fr_plot_image(frc);
@@ -58,7 +59,9 @@ int fr_random_number()
 		fd = open("/dev/urandom", O_RDONLY);
 		read(fd, random_bytes, BYTES_SIZE);
 	}
-	return ((int)random_bytes[bytes_pointer++]);
+//	return ((int)random_bytes[bytes_pointer++]);
+//	return ((int)(clock() & 0xFFFFFF));
+	return ((int)(rand() & 0xFFFFFF));
 }
 
 void	fr_solid_color(t_fractol *frc)

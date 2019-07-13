@@ -6,7 +6,7 @@
 /*   By: fsmith <fsmith@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/14 16:37:14 by fsmith            #+#    #+#             */
-/*   Updated: 2019/07/10 20:32:22 by fsmith           ###   ########.fr       */
+/*   Updated: 2019/07/13 21:00:52 by fsmith           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,10 @@ void		fr_evaluate(t_fractol *frc)
 			pthread_create(&(threads[i]), NULL, fr_thread_mandelbrot, &data[i]);
 		else if (frc->type == BURNING_SHIP)
 			pthread_create(&(threads[i]), NULL, fr_thread_burning_ship, &data[i]);
+		else if (frc->type == BUTTERFLY)
+			pthread_create(&(threads[i]), NULL, fr_thread_butterfly, &data[i]);
+		else if (frc->type == RANDOM)
+			pthread_create(&(threads[i]), NULL, fr_thread_random, &data[i]);
 
 		i++;
 	}
@@ -81,5 +85,35 @@ void		fr_move_to_center(t_fractol *frc)
 	frc->offset_x = -WINDOW_W / 2;
 	frc->offset_y = -WINDOW_H / 2;
 	frc->scale = START_SCALE;
+	fr_plot_image(frc);
+}
+
+void	fr_random_fractol(t_fractol *frc)
+{
+	mlx_clear_window((*frc).svc->mlx_ptr, (*frc).svc->win_ptr);
+	if (rand() % 2 == 0)
+		frc->ctrl->s1 = 1;
+	else
+		frc->ctrl->s1 = -1;
+	if (rand() % 2 == 0)
+		frc->ctrl->s2 = 1;
+	else
+		frc->ctrl->s2 = -1;
+	if (rand() % 2 == 0)
+		frc->ctrl->s3 = 1;
+	else
+		frc->ctrl->s3 = -1;
+	frc->ctrl->s4 = (int)rand() % 10;
+	if (frc->ctrl->s4 == 9)
+		frc->ctrl->s4 = 1.5;
+	else if (frc->ctrl->s4 == 8)
+		frc->ctrl->s4 = 3;
+	else
+		frc->ctrl->s4 = 2;
+	frc->ctrl->s5 = (int)rand() % 3;
+	if (rand() % 2 == 0)
+		frc->ctrl->s6 = 1;
+	else
+		frc->ctrl->s6 = -1;
 	fr_plot_image(frc);
 }

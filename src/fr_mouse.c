@@ -6,7 +6,7 @@
 /*   By: fsmith <fsmith@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/14 16:18:53 by fsmith            #+#    #+#             */
-/*   Updated: 2019/07/13 19:08:48 by fsmith           ###   ########.fr       */
+/*   Updated: 2019/07/13 20:25:13 by fsmith           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ int			fr_mouse_move(int x, int y, t_fractol *frc)
 {
 	frc->ctrl->x = x;
 	frc->ctrl->y = y;
-	if (frc->type == JULIA)
+	if (frc->type == JULIA || frc->type == BUTTERFLY || frc->type == RANDOM)
 	{
 		frc->ctrl->c.r = (frc->ctrl->x + frc->offset_x) / frc->scale;
 		frc->ctrl->c.i = (frc->ctrl->y + frc->offset_y) / frc->scale;

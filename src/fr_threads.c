@@ -6,7 +6,7 @@
 /*   By: fsmith <fsmith@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/28 16:17:18 by fsmith            #+#    #+#             */
-/*   Updated: 2019/07/13 19:18:41 by fsmith           ###   ########.fr       */
+/*   Updated: 2019/07/13 21:07:05 by fsmith           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,12 +95,13 @@ void*		fr_thread_burning_ship(void* thread_data)
 		y = 0;
 
 		//	Преобразование координат пикселя в число на комплексной плоскости
-		c.r = (double)(x + data->frc->offset_x) / data->frc->scale;
+		//	перевернулись x и у почему-то
+		c.i = (double)(x + data->frc->offset_x) / data->frc->scale;
 
 		//	Проход по всей высоте окна
 		while (y < WINDOW_H)
 		{
-			c.i = (double)(y + data->frc->offset_y) / data->frc->scale;
+			c.r = (double)(y + data->frc->offset_y) / data->frc->scale;
 
 			/*
 			**	Последовательное исследование каждой точки на
@@ -109,6 +110,58 @@ void*		fr_thread_burning_ship(void* thread_data)
 			*/
 			fr_set_pixel(*data->frc, x, y,
 				fr_color_calc_burning_ship(*data->frc->clr, n, c));
+			y++;
+		}
+		x++;
+	}
+	return NULL;
+}
+
+void*		fr_thread_butterfly(void* thread_data) // butterfly
+{
+	t_tdata *data;
+	int		x;
+	int		y;
+	t_point	n;
+
+	data = (t_tdata*) thread_data;
+	x = data->start_x;
+	while (x < data->end_x)
+	{
+		y = 0;
+		n.r = (x + data->frc->offset_x) / data->frc->scale;
+		while (y < WINDOW_H)
+		{
+			n.i = (y + data->frc->offset_y) / data->frc->scale;
+			fr_set_pixel(*data->frc, x, y,
+						 fr_color_calc_burning_ship(*data->frc->clr,
+							n, data->frc->ctrl->c));
+			y++;
+		}
+		x++;
+	}
+	return NULL;
+}
+
+void*		fr_thread_random(void* thread_data)
+{
+	t_tdata *data;
+	int		x;
+	int		y;
+	t_point	n;
+
+	data = (t_tdata*) thread_data;
+	x = data->start_x;
+	while (x < data->end_x)
+	{
+		y = 0;
+		n.r = (x + data->frc->offset_x) / data->frc->scale;
+		while (y < WINDOW_H)
+		{
+			n.i = (y + data->frc->offset_y) / data->frc->scale;
+			fr_set_pixel(*data->frc, x, y,
+						 fr_color_calc_random_fractol(*data->frc->ctrl, *data->frc->clr,
+							n, data->frc->ctrl->c));
 			y++;
 		}
 		x++;

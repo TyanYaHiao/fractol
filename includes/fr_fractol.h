@@ -6,7 +6,7 @@
 /*   By: fsmith <fsmith@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/14 14:57:26 by fsmith            #+#    #+#             */
-/*   Updated: 2019/07/13 19:08:48 by fsmith           ###   ########.fr       */
+/*   Updated: 2019/07/13 21:00:52 by fsmith           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,10 +43,9 @@
 
 # define MANDELBROT			1
 # define JULIA				2
-# define TURTLE				3
-# define ISLAND				4
-# define BURNING_SHIP		5
-# define EXPLANATION		6
+# define BUTTERFLY			3
+# define BURNING_SHIP		4
+# define RANDOM				5
 
 # define KEYBOARD			1
 # define MOUSE				2
@@ -107,6 +106,12 @@ typedef struct		s_control
 	int 			x;
 	int 			y;
 	t_point			c;
+	int 			s1;
+	int 			s2;
+	int 			s3;
+	double 			s4;
+	int 			s5;
+	int 			s6;
 }					t_control;
 
 /*
@@ -167,6 +172,7 @@ void		fr_evaluate(t_fractol *frc);
 void*		fr_thread_julia(void* thread_data);
 void*		fr_thread_mandelbrot(void* thread_data);
 void*		fr_thread_burning_ship(void* thread_data);
+void*		fr_thread_butterfly(void* thread_data);
 void		fr_scale_image(int mode, int keycode, t_fractol *frc, int x, int y);
 int			fr_keyboard_press(int keycode, t_fractol *frc);
 int 		fr_move(int keycode, t_fractol *frc);
@@ -185,5 +191,8 @@ int 		fr_random_color(t_fractol *frc);
 void		fr_rainbow_color(t_fractol *frc);
 void		fr_solid_color(t_fractol *frc);
 int			fr_random_number();
+void		fr_random_fractol(t_fractol *frc);
+void*		fr_thread_random(void* thread_data);
+int 		fr_color_calc_random_fractol(t_control ctrl, t_color color, t_point n, t_point c);
 
 #endif
