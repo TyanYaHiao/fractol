@@ -6,7 +6,7 @@
 /*   By: fsmith <fsmith@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/14 14:57:26 by fsmith            #+#    #+#             */
-/*   Updated: 2019/07/12 22:55:50 by fsmith           ###   ########.fr       */
+/*   Updated: 2019/07/13 19:08:48 by fsmith           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,12 @@
 # define KEY_NUM_LEFT		123
 # define KEY_NUM_RIGHT		124
 
+typedef struct		s_point
+{
+	double 			r;
+	double 			i;
+}					t_point;
+
 /*
 **	Структура для управления
 */
@@ -100,10 +106,7 @@ typedef struct		s_control
 	int 			prev_y;
 	int 			x;
 	int 			y;
-	double			n_r;
-	double			n_i;
-	double			c_r;
-	double			c_i;
+	t_point			c;
 }					t_control;
 
 /*
@@ -124,9 +127,8 @@ typedef struct		s_service
 typedef struct		s_color
 {
 	int 			stable;
-	int 			unstable;
 	int 			shift;
-	int 			*direct;
+	int 			*unstable;
 	int				counter;
 }					t_color;
 
@@ -177,7 +179,8 @@ void		fr_info(t_fractol *frc);
 int			fr_close(void *param);
 int 		fr_color(t_fractol *fractol, int n);
 void		fr_move_to_center(t_fractol *frc);
-int			fr_color_calc_mandelbrot(t_color color, double n_r, double n_i, double c_r, double c_i);
+int 		fr_color_calc_mandelbrot(t_color color, t_point n, t_point c);
+int 		fr_color_calc_burning_ship(t_color color, t_point n, t_point c);
 int 		fr_random_color(t_fractol *frc);
 void		fr_rainbow_color(t_fractol *frc);
 void		fr_solid_color(t_fractol *frc);

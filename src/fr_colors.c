@@ -6,7 +6,7 @@
 /*   By: fsmith <fsmith@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/14 16:57:13 by fsmith            #+#    #+#             */
-/*   Updated: 2019/07/12 23:17:52 by fsmith           ###   ########.fr       */
+/*   Updated: 2019/07/13 18:14:30 by fsmith           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 int 	fr_random_color(t_fractol *frc)
 {
 	mlx_clear_window((*frc).svc->mlx_ptr, (*frc).svc->win_ptr);
-	frc->clr->unstable = fr_random_number() & 0xFF;
 	frc->clr->stable = fr_random_number() & 0xFF +
 			((fr_random_number() & 0xFF) << 0x8) +
 			((fr_random_number() & 0xFF) << 0x16);
@@ -23,7 +22,7 @@ int 	fr_random_color(t_fractol *frc)
 	int i = 0;
 	while (i < MAX_ITERATIONS)
 	{
-		frc->clr->direct[i] = fr_random_number() & 0xFF +
+		frc->clr->unstable[i] = fr_random_number() & 0xFF +
 							((fr_random_number() & 0xFF) << 0x8) +
 							((fr_random_number() & 0xFF) << 0x16);
 		i++;
@@ -76,10 +75,9 @@ void	fr_solid_color(t_fractol *frc)
 		frc->clr->shift = 4;
 	else if (i % 3 == (2 + frc->clr->counter) % 3)
 		frc->clr->shift = 0;
-	frc->clr->unstable = 0xFF;
 	while (i < MAX_ITERATIONS)
 	{
-		frc->clr->direct[i] = (frc->clr->unstable / 16 * i) << frc->clr->shift;
+		frc->clr->unstable[i] = (0xFF / 16 * i) << frc->clr->shift;
 		i++;
 	}
 	fr_plot_image(frc);
@@ -100,19 +98,19 @@ void	fr_rainbow_color(t_fractol *frc)
 	while (i < MAX_ITERATIONS)
 	{
 		if (i % 7 == (0 + frc->clr->counter) % 7)
-			frc->clr->direct[i] = RED;
+			frc->clr->unstable[i] = RED;
 		else if (i % 7 == (1 + frc->clr->counter) % 7)
-			frc->clr->direct[i] = ORANGE;
+			frc->clr->unstable[i] = ORANGE;
 		else if (i % 7 == (2 + frc->clr->counter) % 7)
-			frc->clr->direct[i] = YELLOW;
+			frc->clr->unstable[i] = YELLOW;
 		else if (i % 7 == (3 + frc->clr->counter) % 7)
-			frc->clr->direct[i] = GREEN;
+			frc->clr->unstable[i] = GREEN;
 		else if (i % 7 == (4 + frc->clr->counter) % 7)
-			frc->clr->direct[i] = TEAL;
+			frc->clr->unstable[i] = TEAL;
 		else if (i % 7 == (5 + frc->clr->counter) % 7)
-			frc->clr->direct[i] = BLUE;
+			frc->clr->unstable[i] = BLUE;
 		else if (i % 7 == (6 + frc->clr->counter) % 7)
-			frc->clr->direct[i] = PURPLE;
+			frc->clr->unstable[i] = PURPLE;
 		i++;
 	}
 	fr_plot_image(frc);

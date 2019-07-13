@@ -1,20 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_abs_double.c                                    :+:      :+:    :+:   */
+/*   ft_diff_double.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fsmith <fsmith@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/03/23 20:30:56 by fsmith            #+#    #+#             */
-/*   Updated: 2019/07/10 20:09:17 by fsmith           ###   ########.fr       */
+/*   Created: 2019/07/13 18:44:12 by fsmith            #+#    #+#             */
+/*   Updated: 2019/07/13 18:44:20 by fsmith           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-double		ft_abs_double(double number)
+double		ft_diff_double(double x0, double x1)
 {
-	if (number < 0)
-		return (number * (-1));
-	return (number);
+	double	d;
+
+	d = x1 - x0;
+	if (d < 0)
+		return (-1 * d);
+	return (d);
 }
