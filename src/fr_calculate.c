@@ -6,7 +6,7 @@
 /*   By: fsmith <fsmith@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/13 19:21:17 by fsmith            #+#    #+#             */
-/*   Updated: 2019/07/13 20:46:04 by fsmith           ###   ########.fr       */
+/*   Updated: 2019/07/13 22:12:48 by fsmith           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,21 +56,20 @@ int 	fr_color_calc_burning_ship(t_color color, t_point n, t_point c)
 		return(color.unstable[i]);
 }
 
-int 	fr_color_calc_random_fractol(t_control ctrl, t_color color, t_point n, t_point c)
+int 	fr_color_calc_random_fractol(t_coeff cff, t_color color,
+									t_point n, t_point c)
 {
 	int	i;
 	t_point temp;
 
 	i = 0;
-
-	//	Исследование точки на стабильность
-	while (i < MAX_ITERATIONS && (n.r * n.r * 0.95 + n.i * n.i) <= 4)
+	while (i < MAX_ITERATIONS && (n.r * n.r * 0.95 + n.i * n.i) <= cff.c1)
 	{
-		temp.r = ctrl.s1 * n.r * n.r + ctrl.s2 * n.i * n.i + ctrl.s3 * c.i;
-		if (ctrl.s5)
-			temp.i = ctrl.s4 * ft_abs_double(n.r * n.i) + ctrl.s6 * c.r;
+		temp.r = cff.r1 * n.r * n.r + cff.r2 * n.i * n.i + cff.r3 * c.i;
+		if (cff.abs)
+			temp.i = cff.i1 * ft_abs_double(n.r * n.i) + cff.i2 * c.r;
 		else
-			temp.i = ctrl.s4 * n.r * n.i + ctrl.s6 * c.r;
+			temp.i = cff.i1 * n.r * n.i + cff.i2 * c.r;
 		n.r = temp.r;
 		n.i = temp.i;
 		i++;

@@ -6,7 +6,7 @@
 /*   By: fsmith <fsmith@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/14 15:46:40 by fsmith            #+#    #+#             */
-/*   Updated: 2019/07/13 20:41:25 by fsmith           ###   ########.fr       */
+/*   Updated: 2019/07/13 22:14:19 by fsmith           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 void 	fr_init_fractol(t_fractol *fractol)
 {
-
 	fractol->offset_x = -WINDOW_W / 2;
 	fractol->offset_y = -WINDOW_H / 2;
 	fractol->scale = START_SCALE;
@@ -26,7 +25,6 @@ void 	fr_init_fractol(t_fractol *fractol)
 		WINDOW_H);
 	fractol->svc->image = mlx_get_data_addr(fractol->svc->img_ptr,
 		&fractol->svc->bpp, &fractol->svc->s_line, &fractol->svc->endian);
-
 	fractol->ctrl = (t_control*)malloc(sizeof(t_control));
 	fractol->ctrl->mouse_left_button = FALSE;
 	fractol->ctrl->mouse_right_button = FALSE;
@@ -36,32 +34,36 @@ void 	fr_init_fractol(t_fractol *fractol)
 	fractol->clr->stable = 0x0;
 	fractol->clr->shift = 16;
 	fractol->clr->unstable = (int*)malloc(sizeof(int) * MAX_ITERATIONS);
-	fractol->clr->counter = 0;
+	fractol->cff = (t_coeff*)malloc(sizeof(t_coeff));
+	fractol->cff->color = 0;
 	if (fractol->type == RANDOM)
-	{
-		if (rand() % 2 == 0)
-			fractol->ctrl->s1 = 1;
-		else
-			fractol->ctrl->s1 = -1;
-		if (rand() % 2 == 0)
-			fractol->ctrl->s2 = 1;
-		else
-			fractol->ctrl->s2 = -1;
-		if (rand() % 2 == 0)
-			fractol->ctrl->s3 = 1;
-		else
-			fractol->ctrl->s3 = -1;
-		fractol->ctrl->s4 = rand() % 3;
-		if (fractol->ctrl->s4 == 0)
-			fractol->ctrl->s4 = 1.5;
-		if (rand() % 2 == 0)
-			fractol->ctrl->s5 = 1;
-		else
-			fractol->ctrl->s5 = -1;
-		if (rand() % 2 == 0)
-			fractol->ctrl->s6 = 1;
-		else
-			fractol->ctrl->s6 = -1;
-	}
+		fr_new_coefficients(fractol);
 	fr_solid_color(fractol);
+}
+
+void	fr_new_coefficients(t_fractol *fractol)
+{
+	fractol->cff->c1 = (rand() % 4) + 3;
+	if (fractol->cff->c1 == 6)
+		fractol->cff->c1 = 4;
+	fractol->cff->r1 = rand() % 2;
+	if (fractol->cff->r1 == 0)
+		fractol->cff->r1 = -1;
+	fractol->cff->r2 = rand() % 2;
+	if (fractol->cff->r2 == 0)
+		fractol->cff->r2 = -1;
+	fractol->cff->r3 = rand() % 2;
+	if (fractol->cff->r3 == 0)
+		fractol->cff->r3 = -1;
+	fractol->cff->abs = rand() % 5;
+	fractol->cff->i1 = rand() % 9;
+	if (fractol->cff->i1 == 0)
+		fractol->cff->i1 = 1.5;
+	else if (fractol->cff->i1 == 1)
+		fractol->cff->i1 = 3;
+	else
+		fractol->cff->i1 = 2;
+	fractol->cff->i2 = rand() % 2;
+	if (fractol->cff->i2 == 0)
+		fractol->cff->i2 = -1;
 }

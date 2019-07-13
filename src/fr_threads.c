@@ -6,7 +6,7 @@
 /*   By: fsmith <fsmith@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/28 16:17:18 by fsmith            #+#    #+#             */
-/*   Updated: 2019/07/13 21:07:05 by fsmith           ###   ########.fr       */
+/*   Updated: 2019/07/13 21:08:02 by fsmith           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -160,7 +160,7 @@ void*		fr_thread_random(void* thread_data)
 		{
 			n.i = (y + data->frc->offset_y) / data->frc->scale;
 			fr_set_pixel(*data->frc, x, y,
-						 fr_color_calc_random_fractol(*data->frc->ctrl, *data->frc->clr,
+						 fr_color_calc_random_fractol(*data->frc->cff, *data->frc->clr,
 							n, data->frc->ctrl->c));
 			y++;
 		}

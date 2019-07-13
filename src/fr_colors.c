@@ -6,7 +6,7 @@
 /*   By: fsmith <fsmith@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/14 16:57:13 by fsmith            #+#    #+#             */
-/*   Updated: 2019/07/13 20:13:10 by fsmith           ###   ########.fr       */
+/*   Updated: 2019/07/13 21:57:57 by fsmith           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,12 +71,12 @@ void	fr_solid_color(t_fractol *frc)
 	mlx_clear_window((*frc).svc->mlx_ptr, (*frc).svc->win_ptr);
 	i = 0;
 	frc->clr->stable = 0x0;
-	frc->clr->counter++;
-	if (i % 3 == (0 + frc->clr->counter) % 3)
+	frc->cff->color++;
+	if (i % 3 == (0 + frc->cff->color) % 3)
 		frc->clr->shift = 16;
-	else if (i % 3 == (1 + frc->clr->counter) % 3)
+	else if (i % 3 == (1 + frc->cff->color) % 3)
 		frc->clr->shift = 4;
-	else if (i % 3 == (2 + frc->clr->counter) % 3)
+	else if (i % 3 == (2 + frc->cff->color) % 3)
 		frc->clr->shift = 0;
 	while (i < MAX_ITERATIONS)
 	{
@@ -93,26 +93,26 @@ void	fr_rainbow_color(t_fractol *frc)
 	mlx_clear_window((*frc).svc->mlx_ptr, (*frc).svc->win_ptr);
 	i = 0;
 	frc->clr->stable = 0xFFFFFF;
-	frc->clr->counter++;
+	frc->cff->color++;
 //	if (frc->clr->counter > 6)
 //		frc->clr->counter = 0;
 //	frc->clr->shift = 0x10;
 //	frc->clr->unstable = 0xFF;
 	while (i < MAX_ITERATIONS)
 	{
-		if (i % 7 == (0 + frc->clr->counter) % 7)
+		if (i % 7 == (0 + frc->cff->color) % 7)
 			frc->clr->unstable[i] = RED;
-		else if (i % 7 == (1 + frc->clr->counter) % 7)
+		else if (i % 7 == (1 + frc->cff->color) % 7)
 			frc->clr->unstable[i] = ORANGE;
-		else if (i % 7 == (2 + frc->clr->counter) % 7)
+		else if (i % 7 == (2 + frc->cff->color) % 7)
 			frc->clr->unstable[i] = YELLOW;
-		else if (i % 7 == (3 + frc->clr->counter) % 7)
+		else if (i % 7 == (3 + frc->cff->color) % 7)
 			frc->clr->unstable[i] = GREEN;
-		else if (i % 7 == (4 + frc->clr->counter) % 7)
+		else if (i % 7 == (4 + frc->cff->color) % 7)
 			frc->clr->unstable[i] = TEAL;
-		else if (i % 7 == (5 + frc->clr->counter) % 7)
+		else if (i % 7 == (5 + frc->cff->color) % 7)
 			frc->clr->unstable[i] = BLUE;
-		else if (i % 7 == (6 + frc->clr->counter) % 7)
+		else if (i % 7 == (6 + frc->cff->color) % 7)
 			frc->clr->unstable[i] = PURPLE;
 		i++;
 	}

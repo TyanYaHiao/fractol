@@ -47,3 +47,8 @@ void		fr_plot_image(t_fractol *frc)
 	*/
 	fr_info(frc);
 }
+
+void	fr_print_koeffs(t_fractol *frc)
+{
+	ft_putendl(ft_itoa(frc->cff->color));
+}

@@ -6,7 +6,7 @@
 /*   By: fsmith <fsmith@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/14 14:57:26 by fsmith            #+#    #+#             */
-/*   Updated: 2019/07/13 21:00:52 by fsmith           ###   ########.fr       */
+/*   Updated: 2019/07/13 22:02:20 by fsmith           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,13 +106,19 @@ typedef struct		s_control
 	int 			x;
 	int 			y;
 	t_point			c;
-	int 			s1;
-	int 			s2;
-	int 			s3;
-	double 			s4;
-	int 			s5;
-	int 			s6;
 }					t_control;
+
+typedef struct		s_coeff
+{
+	int 			c1;
+	int				color;
+	int 			r1;
+	int 			r2;
+	int 			r3;
+	int 			abs;
+	double 			i1;
+	int 			i2;
+}					t_coeff;
 
 /*
 **	Структура с сервисной информацией
@@ -134,7 +140,6 @@ typedef struct		s_color
 	int 			stable;
 	int 			shift;
 	int 			*unstable;
-	int				counter;
 }					t_color;
 
 /*
@@ -150,6 +155,7 @@ typedef struct		s_fractol
 	t_service		*svc;
 	t_control		*ctrl;
 	t_color			*clr;
+	t_coeff			*cff;
 }					t_fractol;
 
 /*
@@ -193,6 +199,7 @@ void		fr_solid_color(t_fractol *frc);
 int			fr_random_number();
 void		fr_random_fractol(t_fractol *frc);
 void*		fr_thread_random(void* thread_data);
-int 		fr_color_calc_random_fractol(t_control ctrl, t_color color, t_point n, t_point c);
+void		fr_new_coefficients(t_fractol *fractol);
+int 		fr_color_calc_random_fractol(t_coeff cff, t_color color, t_point n, t_point c);
 
 #endif
