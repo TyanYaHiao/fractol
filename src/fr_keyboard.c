@@ -6,7 +6,7 @@
 /*   By: fsmith <fsmith@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/14 16:12:52 by fsmith            #+#    #+#             */
-/*   Updated: 2019/07/13 20:24:15 by fsmith           ###   ########.fr       */
+/*   Updated: 2019/07/17 21:22:11 by fsmith           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,8 @@ int			fr_keyboard_press(int keycode, t_fractol *frc)
 			fr_solid_color(frc);
 		if (keycode == KEY_R)
 			fr_random_fractol(frc);
+		if (keycode == KEY_T)
+			fr_gradient_color(frc);
 		if (keycode == KEY_Z)
 			fr_print_koeffs(frc);
 //		if (keycode == KEY_NUM_1 || keycode == KEY_NUM_2 ||

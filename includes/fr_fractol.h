@@ -6,7 +6,7 @@
 /*   By: fsmith <fsmith@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/14 14:57:26 by fsmith            #+#    #+#             */
-/*   Updated: 2019/07/13 22:02:20 by fsmith           ###   ########.fr       */
+/*   Updated: 2019/07/17 19:54:23 by fsmith           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@
 # define TEXT_COLOR			0x00cdcd
 # define RED				0xFF0000
 # define ORANGE				0xFF4500
-# define YELLOW				0xFFFF00
+# define YELLOW				0xFFD700
 # define GREEN				0x228B22
 # define TEAL				0x00FFFF
 # define BLUE				0x0000FF
@@ -140,6 +140,7 @@ typedef struct		s_color
 	int 			stable;
 	int 			shift;
 	int 			*unstable;
+	int 			*solid_colors;
 }					t_color;
 
 /*
@@ -196,6 +197,7 @@ int 		fr_color_calc_burning_ship(t_color color, t_point n, t_point c);
 int 		fr_random_color(t_fractol *frc);
 void		fr_rainbow_color(t_fractol *frc);
 void		fr_solid_color(t_fractol *frc);
+void		fr_gradient_color(t_fractol *frc);
 int			fr_random_number();
 void		fr_random_fractol(t_fractol *frc);
 void*		fr_thread_random(void* thread_data);

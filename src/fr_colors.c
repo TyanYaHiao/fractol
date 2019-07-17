@@ -6,7 +6,7 @@
 /*   By: fsmith <fsmith@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/14 16:57:13 by fsmith            #+#    #+#             */
-/*   Updated: 2019/07/13 21:57:57 by fsmith           ###   ########.fr       */
+/*   Updated: 2019/07/17 21:27:51 by fsmith           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,10 +78,26 @@ void	fr_solid_color(t_fractol *frc)
 		frc->clr->shift = 4;
 	else if (i % 3 == (2 + frc->cff->color) % 3)
 		frc->clr->shift = 0;
+
 	while (i < MAX_ITERATIONS)
 	{
 //		frc->clr->unstable[i] = (0xFF / 16 * i) << frc->clr->shift;
 		frc->clr->unstable[i] = fr_color_gradation(ORANGE, i);
+		i++;
+	}
+	fr_plot_image(frc);
+}
+
+void	fr_gradient_color(t_fractol *frc)
+{
+	int i;
+
+	mlx_clear_window((*frc).svc->mlx_ptr, (*frc).svc->win_ptr);
+	i = 0;
+	frc->clr->stable = 0x0;
+	while (i < MAX_ITERATIONS)
+	{
+		frc->clr->unstable[i] = (0xFF / 16 * i) << frc->clr->shift;
 		i++;
 	}
 	fr_plot_image(frc);
@@ -94,17 +110,24 @@ int 	fr_color_gradation(int color, int i)
 	int		blue;
 	int 	green;
 
-	gradation = (double)(MAX_ITERATIONS - i) / (double)MAX_ITERATIONS;
-//	if (gradation > 0.25)
-//		gradation *= gradation + 1;
-//	if (gradation > 1)
-//		gradation = 1;
-	printf("%f ", gradation);
-	red = ((color >> 16) & 0xFF) * gradation;
-
-	green = ((color >> 8) & 0xFF) * gradation;
-	blue = (int)((color & 0xFF) * gradation);
-	printf("%d\n", red);
+	if (i < MAX_ITERATIONS / 2)
+	{
+//	printf("%f ", gradation);
+		gradation = (double)(i) / (double)MAX_ITERATIONS * 2;
+		red = (int)(((color >> 16) & 0xFF) * gradation);
+		green = (int)(((color >> 8) & 0xFF) * gradation);
+		blue = (int)((color & 0xFF) * gradation);
+//		printf("%d\n", red);
+	}
+	else
+	{
+		gradation = (double)(i) / (double)MAX_ITERATIONS;
+		gradation = (gradation - 0.5) * 2;
+		red = ((0xFF - (color >> 16) & 0xFF) * gradation) + ((color >> 16) & 0xFF);
+		green = (0xFF - (color >> 8) & 0xFF) * gradation + ((color >> 8) & 0xFF);
+		blue = (0xFF - color & 0xFF) * gradation + ((color >> 0) & 0xFF);
+		printf("%d: %f, %x, %x, %x\n",i, gradation, red, green, blue);
+	}
 	return ((red << 16) + (green << 8) + blue);
 //	return (15 * i << 16);
 }
