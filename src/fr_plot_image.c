@@ -50,5 +50,8 @@ void		fr_plot_image(t_fractol *frc)
 
 void	fr_print_koeffs(t_fractol *frc)
 {
+	if (frc->cff->r1 < 0)
+		ft_putchar('-');
+	ft_putstr("n.r");
 	ft_putendl(ft_itoa(frc->cff->color));
 }

@@ -80,10 +80,33 @@ void	fr_solid_color(t_fractol *frc)
 		frc->clr->shift = 0;
 	while (i < MAX_ITERATIONS)
 	{
-		frc->clr->unstable[i] = (0xFF / 16 * i) << frc->clr->shift;
+//		frc->clr->unstable[i] = (0xFF / 16 * i) << frc->clr->shift;
+		frc->clr->unstable[i] = fr_color_gradation(ORANGE, i);
 		i++;
 	}
 	fr_plot_image(frc);
+}
+
+int 	fr_color_gradation(int color, int i)
+{
+	double	gradation;
+	int 	red;
+	int		blue;
+	int 	green;
+
+	gradation = (double)(MAX_ITERATIONS - i) / (double)MAX_ITERATIONS;
+//	if (gradation > 0.25)
+//		gradation *= gradation + 1;
+//	if (gradation > 1)
+//		gradation = 1;
+	printf("%f ", gradation);
+	red = ((color >> 16) & 0xFF) * gradation;
+
+	green = ((color >> 8) & 0xFF) * gradation;
+	blue = (int)((color & 0xFF) * gradation);
+	printf("%d\n", red);
+	return ((red << 16) + (green << 8) + blue);
+//	return (15 * i << 16);
 }
 
 void	fr_rainbow_color(t_fractol *frc)

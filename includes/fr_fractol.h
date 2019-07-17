@@ -200,6 +200,8 @@ int			fr_random_number();
 void		fr_random_fractol(t_fractol *frc);
 void*		fr_thread_random(void* thread_data);
 void		fr_new_coefficients(t_fractol *fractol);
+void		fr_print_koeffs(t_fractol *frc);
+int 		fr_color_gradation(int color, int i);
 int 		fr_color_calc_random_fractol(t_coeff cff, t_color color, t_point n, t_point c);
 
 #endif
