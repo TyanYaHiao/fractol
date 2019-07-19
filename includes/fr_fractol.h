@@ -6,7 +6,7 @@
 /*   By: fsmith <fsmith@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/14 14:57:26 by fsmith            #+#    #+#             */
-/*   Updated: 2019/07/17 19:54:23 by fsmith           ###   ########.fr       */
+/*   Updated: 2019/07/19 22:58:03 by fsmith           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,8 @@
 # define TEAL				0x00FFFF
 # define BLUE				0x0000FF
 # define PURPLE				0x8A2BE2
+# define SOLID_COLORS		7
+# define COLOR_DIVIDER		30
 
 # define WINDOW_H			500
 # define WINDOW_W			700
@@ -40,6 +42,9 @@
 # define THREADS			16
 # define STEP_X				100
 # define STEP_Y				100
+
+# define OFF				0
+# define ON					1
 
 # define MANDELBROT			1
 # define JULIA				2
@@ -72,6 +77,8 @@
 # define KEY_B				11
 # define KEY_Q				12
 # define KEY_W				13
+# define KEY_C				8
+# define KEY_V				9
 # define KEY_SPACE			49
 # define KEY_PLUS			69
 # define KEY_MINUS			78
@@ -105,6 +112,7 @@ typedef struct		s_control
 	int 			prev_y;
 	int 			x;
 	int 			y;
+	int				help;
 	t_point			c;
 }					t_control;
 
@@ -140,7 +148,7 @@ typedef struct		s_color
 	int 			stable;
 	int 			shift;
 	int 			*unstable;
-	int 			*solid_colors;
+	int 			*rainbow;
 }					t_color;
 
 /*
@@ -190,7 +198,6 @@ int			fr_mouse_release(int button, int x, int y, t_fractol *frc);
 int			fr_mouse_move(int x, int y, t_fractol *frc);
 void		fr_info(t_fractol *frc);
 int			fr_close(void *param);
-int 		fr_color(t_fractol *fractol, int n);
 void		fr_move_to_center(t_fractol *frc);
 int 		fr_color_calc_mandelbrot(t_color color, t_point n, t_point c);
 int 		fr_color_calc_burning_ship(t_color color, t_point n, t_point c);
@@ -199,11 +206,15 @@ void		fr_rainbow_color(t_fractol *frc);
 void		fr_solid_color(t_fractol *frc);
 void		fr_gradient_color(t_fractol *frc);
 int			fr_random_number();
+void		fr_solid_colors_init(t_fractol *frc);
 void		fr_random_fractol(t_fractol *frc);
 void*		fr_thread_random(void* thread_data);
+int 		fr_solid_color_gradation(int color, int i);
 void		fr_new_coefficients(t_fractol *fractol);
 void		fr_print_koeffs(t_fractol *frc);
+void		fr_help_switch(t_fractol *frc);
 int 		fr_color_gradation(int color, int i);
+void		fr_help_show(t_fractol *frc);
 int 		fr_color_calc_random_fractol(t_coeff cff, t_color color, t_point n, t_point c);
 
 #endif

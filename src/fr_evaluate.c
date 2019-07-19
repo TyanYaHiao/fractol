@@ -6,7 +6,7 @@
 /*   By: fsmith <fsmith@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/14 16:37:14 by fsmith            #+#    #+#             */
-/*   Updated: 2019/07/13 21:03:49 by fsmith           ###   ########.fr       */
+/*   Updated: 2019/07/19 20:02:16 by fsmith           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,7 @@ void		fr_scale_image(int mode, int keycode, t_fractol *frc, int x, int y)
 
 void		fr_move_to_center(t_fractol *frc)
 {
+	mlx_clear_window((*frc).svc->mlx_ptr, (*frc).svc->win_ptr);
 	frc->offset_x = -WINDOW_W / 2;
 	frc->offset_y = -WINDOW_H / 2;
 	frc->scale = START_SCALE;

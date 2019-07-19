@@ -6,7 +6,7 @@
 /*   By: fsmith <fsmith@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/14 15:52:39 by fsmith            #+#    #+#             */
-/*   Updated: 2019/07/17 19:16:34 by fsmith           ###   ########.fr       */
+/*   Updated: 2019/07/19 20:02:16 by fsmith           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,8 @@ void		fr_plot_image(t_fractol *frc)
 	**  Вывод сервисной инфы
 	*/
 	fr_info(frc);
+	if (frc->cff->color > MAX_ITERATIONS)
+		frc->cff->color = MAX_ITERATIONS & 1;
 }
 
 void	fr_print_koeffs(t_fractol *frc)
