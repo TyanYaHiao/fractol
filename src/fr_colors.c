@@ -6,32 +6,19 @@
 /*   By: fsmith <fsmith@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/14 16:57:13 by fsmith            #+#    #+#             */
-/*   Updated: 2019/07/19 23:04:51 by fsmith           ###   ########.fr       */
+/*   Updated: 2019/07/20 19:04:54 by fsmith           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fr_fractol.h"
 
-void	fr_solid_colors_init(t_fractol *frc)
+int			fr_random_color(t_fractol *frc)
 {
-	int i;
+	int		i;
 
-	frc->clr->rainbow = (int*)malloc(sizeof(int) * SOLID_COLORS);
-	i = 0;
-	frc->clr->rainbow[i++] = RED;
-	frc->clr->rainbow[i++] = ORANGE;
-	frc->clr->rainbow[i++] = YELLOW;
-	frc->clr->rainbow[i++] = GREEN;
-	frc->clr->rainbow[i++] = TEAL;
-	frc->clr->rainbow[i++] = BLUE;
-	frc->clr->rainbow[i++] = PURPLE;
-}
-
-int 	fr_random_color(t_fractol *frc)
-{
 	mlx_clear_window((*frc).svc->mlx_ptr, (*frc).svc->win_ptr);
 	frc->clr->stable = (rand() & 0xFFFFFF);
-	int i = 0;
+	i = 0;
 	while (i < MAX_ITERATIONS)
 	{
 		frc->clr->unstable[i] = (rand() & 0xFFFFFF);
@@ -41,26 +28,9 @@ int 	fr_random_color(t_fractol *frc)
 	return (0);
 }
 
-void	fr_solid_color(t_fractol *frc)
+void		fr_gradient_color(t_fractol *frc)
 {
-	int i;
-
-	mlx_clear_window((*frc).svc->mlx_ptr, (*frc).svc->win_ptr);
-	i = 0;
-	frc->clr->stable = 0x0;
-	frc->cff->color++;
-	while (i < MAX_ITERATIONS)
-	{
-		frc->clr->unstable[i] = fr_solid_color_gradation(
-			(frc->clr->rainbow[(frc->cff->color) % SOLID_COLORS]), i);
-		i++;
-	}
-	fr_plot_image(frc);
-}
-
-void	fr_gradient_color(t_fractol *frc)
-{
-	int i;
+	int		i;
 
 	mlx_clear_window((*frc).svc->mlx_ptr, (*frc).svc->win_ptr);
 	i = 0;
@@ -75,26 +45,12 @@ void	fr_gradient_color(t_fractol *frc)
 	fr_plot_image(frc);
 }
 
-int 	fr_solid_color_gradation(int color, int i)
+int			fr_color_gradation(int color, int i)
 {
 	double	gradation;
-	int 	red;
+	int		red;
 	int		blue;
-	int 	green;
-
-	gradation = (double)(i % COLOR_DIVIDER) / COLOR_DIVIDER;
-	red = (int)(((color >> 16) & 0xFF) * gradation);
-	green = (int)(((color >> 8) & 0xFF) * gradation);
-	blue = (int)((color & 0xFF) * gradation);
-	return ((red << 16) + (green << 8) + blue);
-}
-
-int 	fr_color_gradation(int color, int i)
-{
-	double	gradation;
-	int 	red;
-	int		blue;
-	int 	green;
+	int		green;
 
 	if (i < MAX_ITERATIONS / 2)
 	{
@@ -105,19 +61,20 @@ int 	fr_color_gradation(int color, int i)
 	}
 	else
 	{
-		gradation = (double)(i) / (double)MAX_ITERATIONS;
-		gradation = (gradation - 0.5) * 2;
-		red = ((0xFF - (color >> 16) & 0xFF) * gradation) + ((color >> 16) & 0xFF);
-		green = (0xFF - (color >> 8) & 0xFF) * gradation + ((color >> 8) & 0xFF);
-		blue = (0xFF - color & 0xFF) * gradation + ((color >> 0) & 0xFF);
-//		printf("%d: %f, %x, %x, %x\n",i, gradation, red, green, blue);
+		gradation = (((double)(i) / (double)MAX_ITERATIONS) - 0.5) * 2;
+		red = ((0xFF - (color >> 16) & 0xFF) * gradation) +
+				((color >> 16) & 0xFF);
+		green = (0xFF - (color >> 8) & 0xFF) * gradation +
+				((color >> 8) & 0xFF);
+		blue = (0xFF - color & 0xFF) * gradation +
+				((color >> 0) & 0xFF);
 	}
 	return ((red << 16) + (green << 8) + blue);
 }
 
-void	fr_rainbow_color(t_fractol *frc)
+void		fr_rainbow_color(t_fractol *frc)
 {
-	int i;
+	int		i;
 
 	mlx_clear_window((*frc).svc->mlx_ptr, (*frc).svc->win_ptr);
 	i = 0;

@@ -6,7 +6,7 @@
 #    By: fsmith <fsmith@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/02/19 19:52:14 by fsmith            #+#    #+#              #
-#    Updated: 2019/07/19 20:01:02 by fsmith           ###   ########.fr        #
+#    Updated: 2019/07/20 19:54:05 by fsmith           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,10 +25,10 @@ IFLAGS :=		-I $(INC_PATH) -I $(LIB_PATH)
 LFLAGS :=		-lft -L $(LIB_PATH)
 MLXFLAGS :=		-lmlx -framework OpenGL -framework AppKit
 
-HFILES :=		fractol
-FILES :=		main fdf_read fdf_field fdf_plot fdf_keyboard fdf_evaluate\
-				fdf_rotation fdf_moving fdf_presets fdf_mouse fdf_open_close\
-				fdf_change_color fdf_color_gradient fdf_menu
+HFILES :=		fr_fractol
+FILES :=		main fr_calculate fr_close fr_color_solid fr_colors\
+				fr_evaluate fr_fractol fr_info fr_keyboard\
+				fr_mouse fr_plot_image fr_read fr_threads
 
 LIB :=			$(LIB_PATH)libft.a
 MLX :=			$(MLX_PATH)libmlx.a

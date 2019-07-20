@@ -12,7 +12,7 @@
 
 #include "../includes/fr_fractol.h"
 
-int 	fr_read(int argc, char **argv, t_fractol *fractol)
+int		fr_read(int argc, char **argv, t_fractol *fractol)
 {
 	fractol->type = 0;
 	if (argc != 2 || !(fr_analyse_fractal(argv[1], fractol)))
@@ -29,7 +29,7 @@ int 	fr_read(int argc, char **argv, t_fractol *fractol)
 	return (1);
 }
 
-int 	fr_analyse_fractal(char *fractal, t_fractol *fractol)
+int		fr_analyse_fractal(char *fractal, t_fractol *fractol)
 {
 	if (!(ft_strcmp(fractal, "Mandelbrot")))
 		fractol->type = MANDELBROT;

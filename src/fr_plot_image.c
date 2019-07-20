@@ -6,7 +6,7 @@
 /*   By: fsmith <fsmith@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/14 15:52:39 by fsmith            #+#    #+#             */
-/*   Updated: 2019/07/19 20:02:16 by fsmith           ###   ########.fr       */
+/*   Updated: 2019/07/20 19:29:54 by fsmith           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void		fr_set_pixel(t_fractol frc, int x, int y, int color)
 {
-	int 	*tmp;
+	int		*tmp;
 
 	tmp = (int*)frc.svc->image;
 	if (x >= 0 && x <= WINDOW_W
@@ -30,30 +30,12 @@ void		fr_plot_image(t_fractol *frc)
 	mlx_clear_window(frc->svc->mlx_ptr, frc->svc->win_ptr);
 	frc->svc->img_ptr = mlx_new_image(frc->svc->mlx_ptr, WINDOW_W, WINDOW_H);
 	frc->svc->image = mlx_get_data_addr(frc->svc->img_ptr,
-		&frc->svc->bpp,	&frc->svc->s_line, &frc->svc->endian);
-
-	/*
-	**	Все расчеты фрактала
-	**	оптимизация вычислений
-	*/
+		&frc->svc->bpp, &frc->svc->s_line, &frc->svc->endian);
 	fr_evaluate(frc);
-
 	mlx_put_image_to_window(frc->svc->mlx_ptr, frc->svc->win_ptr,
 		frc->svc->img_ptr, 0, 0);
 	mlx_destroy_image(frc->svc->mlx_ptr, frc->svc->img_ptr);
-
-	/*
-	**  Вывод сервисной инфы
-	*/
 	fr_info(frc);
 	if (frc->cff->color > MAX_ITERATIONS)
 		frc->cff->color = MAX_ITERATIONS & 1;
-}
-
-void	fr_print_koeffs(t_fractol *frc)
-{
-	if (frc->cff->r1 < 0)
-		ft_putchar('-');
-	ft_putstr("n.r");
-	ft_putendl(ft_itoa(frc->cff->color));
 }

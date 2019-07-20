@@ -6,13 +6,13 @@
 /*   By: fsmith <fsmith@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/14 15:46:40 by fsmith            #+#    #+#             */
-/*   Updated: 2019/07/19 22:16:02 by fsmith           ###   ########.fr       */
+/*   Updated: 2019/07/20 19:27:06 by fsmith           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fr_fractol.h"
 
-void 	fr_init_fractol(t_fractol *fractol)
+void	fr_init_fractol(t_fractol *fractol)
 {
 	fractol->offset_x = -WINDOW_W / 2;
 	fractol->offset_y = -WINDOW_H / 2;
@@ -31,12 +31,9 @@ void 	fr_init_fractol(t_fractol *fractol)
 	fractol->ctrl->prev_x = 0;
 	fractol->ctrl->prev_y = 0;
 	fractol->ctrl->help = OFF;
-	fractol->clr = (t_color*)malloc(sizeof(t_color));
-	fractol->clr->stable = 0x0;
-	fractol->clr->shift = 16;
-	fractol->clr->unstable = (int*)malloc(sizeof(int) * MAX_ITERATIONS);
 	fractol->cff = (t_coeff*)malloc(sizeof(t_coeff));
 	fractol->cff->color = 0;
+	fractol->clr = (t_color*)malloc(sizeof(t_color));
 	fr_solid_colors_init(fractol);
 	if (fractol->type == RANDOM)
 		fr_new_coefficients(fractol);
@@ -45,11 +42,10 @@ void 	fr_init_fractol(t_fractol *fractol)
 
 void	fr_new_coefficients(t_fractol *fractol)
 {
-	int random_color;
+	int	random_color;
 
 	random_color = rand();
-	printf("%d\n",random_color);
-	fractol->cff->c1 = ((random_color & 0b1) % 4) + 3;
+	fractol->cff->c1 = ((random_color & 0b11) % 4) + 3;
 	if (fractol->cff->c1 == 6)
 		fractol->cff->c1 = 4;
 	fractol->cff->r1 = ((random_color & 0b10) >> 1) % 2;
@@ -61,15 +57,13 @@ void	fr_new_coefficients(t_fractol *fractol)
 	fractol->cff->r3 = ((random_color & 0b1000) >> 3) % 2;
 	if (fractol->cff->r3 == 0)
 		fractol->cff->r3 = -1;
-	fractol->cff->abs = ((random_color & 0b10000) >> 4) % 5;
-	fractol->cff->i1 = ((random_color & 0b100000) >> 5) % 9;
+	fractol->cff->abs = ((random_color & 0x1A) >> 4) % 5;
+	fractol->cff->i1 = ((random_color & 0x38) >> 5) % 9;
 	if (fractol->cff->i1 == 0)
 		fractol->cff->i1 = 1.5;
 	else if (fractol->cff->i1 == 1)
 		fractol->cff->i1 = 3;
 	else
 		fractol->cff->i1 = 2;
-	fractol->cff->i2 = ((random_color & 0b1000000) >> 6) % 2;
-	if (fractol->cff->i2 == 0)
-		fractol->cff->i2 = -1;
+	fractol->cff->i2 = ((((random_color & 0x40) >> 6) % 2) * 2) - 1;
 }

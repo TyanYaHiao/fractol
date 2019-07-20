@@ -24,7 +24,6 @@ int				main(int argc, char **argv)
 	mlx_hook(fractol.svc->win_ptr, 6, 0, fr_mouse_move, &fractol);
 	mlx_hook(fractol.svc->win_ptr, 17, 0, fr_close, 0);
 	mlx_hook(fractol.svc->win_ptr, 2, 0, fr_keyboard_press, &fractol);
-//	mlx_hook(fractol.svc->win_ptr, 3, 0, fr_keyboard_release, &fractol);
 	mlx_loop(fractol.svc->mlx_ptr);
 	return (0);
 }

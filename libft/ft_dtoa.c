@@ -12,7 +12,6 @@
 
 #include "libft.h"
 
-			/* неверное округление */
 char		*ft_dtoa(double n, size_t precision)
 {
 	char	*str;
